@@ -1,0 +1,13 @@
+.my-bg-navbar{
+    background-color: #07385b; ;
+}
+
+.nav-link:hover{
+    background-color : #001d32; 
+    border-radius: 5px;
+}
+
+.nav-link:active{
+    background-color : #8db9d8; 
+    border-radius: 5px;
+}

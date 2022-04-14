@@ -9,8 +9,10 @@
         // } 
 
         public function index() {
-            $this->load->model("_Date") ;
+            $data['judul'] = "PPPOMN - Perjalanan Dinas" ;
+            $this->load->view('temp/header', $data) ;
             $this->load->view('home/index') ;
+            $this->load->view('temp/footer') ;
         }
 
         
