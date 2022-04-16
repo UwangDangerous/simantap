@@ -12,7 +12,7 @@
         <textarea name="nama" id="nama" cols="30" rows="5" class='form-control mb-3'></textarea>
 
         <label for="noSpm">No. SPM <b>*</b></label>
-        <input type="number" name="noSpm" id="noSpm" class='form-control mb-3'>
+        <input type="text" name="noSpm" id="noSpm" class='form-control mb-3'>
         
         <label for="uang_harian">Uang Harian <b>*</b></label>
         <input type="number" name="uang_harian" id="uang_harian" class='form-control mb-3' placeholder='tuliskan tanpa koma (10000)'>
