@@ -1,4 +1,4 @@
-<div class="card p-3">
+<!-- <div class="p-3"> -->
     <div id="sesi"></div>
     <form action="" method='post' class='myform' id='simpan-perjalanan'>
         <h3>Tambah Perjalanan Dinas</h3>
@@ -21,7 +21,7 @@
         <button class='btn btn-primary' type='button' id='tambah-pelaksana'>Tambah Pelaksana</button>
         <div id="form-pelaksana"> </div>
     </form>
-</div>
+<!-- </div> -->
 
 <script>
     $(document).ready(function(){

@@ -8,9 +8,15 @@
                     <option value="<?= $k['idTrans'];?>"><?= $k['namaTrans'];?></option>
                 <?php endforeach ; ?>
             </select>
+            
             <label for="harga_tiket">Biaya / Harga Tiket</label>
             <input type="number" name="harga_tiket" id="harga_tiket" class='form-control' placeholder='tuliskan tanpa koma *(1000)'>
+            
+            <label for="tgl_kepergian">Tanggal</label>
+            <input type="date" name="tgl_kepergian" id="tgl_kepergian" class='form-control'>
+
             <div id="input-kendaraan-tambahan"></div>
+
             <button class="btn btn-primary mt-3" type='submit'>Simpan</button>
     
         </form>
@@ -38,8 +44,8 @@
                     <label for="tempat_tujuan">Tempat Tujuan</label>
                     <input type="text" name="tempat_tujuan" id="tempat_tujuan" class='form-control'>
 
-                    <label for="tempat_tujuan">Pulang / Pergi</label>
-                    <select name="tempat_tujuan" id="tempat_tujuan" class='form-control'>
+                    <label for="pp">Pulang / Pergi</label>
+                    <select name="pp" id="pp" class='form-control'>
                         
                         <?php foreach($pp as $p) : ?>
                             <option value="<?= $p ; ?>"><?= $p ; ?></option>

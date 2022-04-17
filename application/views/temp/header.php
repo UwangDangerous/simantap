@@ -27,9 +27,9 @@
     </head> 
     <body >
     
-        <nav class="navbar navbar-expand-md fixed-top navbar-dark my-bg-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="#">DINAS</a>
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark my-bg-navbar p-2">
+            <!-- <div class="container"> -->
+                <a class="navbar-brand" href="<?= base_url(); ?>">DINAS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -37,20 +37,20 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a href='' class="nav-link" >Home</a>
+                            <a href='<?= base_url(); ?>' class="nav-link" >Home</a>
                         </li>
                         <li class="nav-item">
                             <a href='#login'  data-toggle="modal" data-target="#masuk" data-toggle='tooltip' title='Login Admin' class="nav-link" id="login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a href='#' class="nav-link" > | </a>
+                             | 
                         </li>
                         <li class="nav-item">
                             <a href='<?= base_url(); ?>Perjalanan' class="nav-link" > Perjalanan Dinas </a>
                         </li>
                     </ul>
                 </div>
-            </div>
+            <!-- </div> -->
         </nav>
 
         <!-- Modal -->
@@ -85,7 +85,7 @@
             </div>
         </div>
         </div>       
-        <div class="container">
+        <div class="p-3">
             <section>
 
 

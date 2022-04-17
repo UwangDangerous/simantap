@@ -28,7 +28,6 @@
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder="Nama Pelaksana Perjalanan Dinas (TANPA GELAR AKADEMIK)" value='<?= $p['namaPelaksana'] ;?>' id='namaPelaksana' name='namaPelaksana'>
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-primary" type="button" id='hotel-show-<?= $p['kode_laksana'];?>' data-toggle='tooltip' title='Tambah Penginapan'><i class="fa fa-hotel"></i></button>
                                             <button class="btn btn-outline-success" type="submit" data-toggle='tooltip' title='Ubah Data'><i class="fa fa-edit"></i></button>
                                             <button class="btn btn-outline-danger" type="button" id='hapus-pelaksana-<?= $p['kode_laksana'];?>' data-toggle='tooltip' title='Hapus Data'><i class="fa fa-trash"></i></button>
                                         </div>
@@ -38,10 +37,10 @@
                         </form>
 
                         <div class="row mb-3">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-3">
                                 <div id="transport-<?= $p['kode_laksana']; ?>"></div> 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 mb-3">
                                 <div id="hotel-<?= $p['kode_laksana']; ?>"></div> 
                             </div>
                         </div>

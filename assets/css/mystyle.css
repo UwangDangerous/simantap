@@ -28,3 +28,7 @@ footer{
     min-height: 200px;
     overflow: scroll;
 }
+
+span .text-hitam{
+    font-weight: bold;
+}
