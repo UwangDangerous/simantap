@@ -23,6 +23,12 @@
                 </div>
             ";
         }
+
+        public function rupiah($rp)
+        {
+            $hasil_rupiah ='Rp' . number_format($rp,0,',','.');
+	        return $hasil_rupiah;
+        }
     }
     
     ?>

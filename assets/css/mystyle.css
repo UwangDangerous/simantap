@@ -32,3 +32,11 @@ footer{
 span .text-hitam{
     font-weight: bold;
 }
+
+/* body{
+    background-color:rgb(77, 77, 77) ;
+} */
+
+.mytab{
+    border: 1px solid;
+}

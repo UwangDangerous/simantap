@@ -6,10 +6,15 @@
         {
             parent::__construct() ;
             $this->load->model('_Sesi'); 
+            $this->load->model('_Date'); 
+            $this->load->model('Perjalanan_model') ;
         } 
 
         public function index() {
             $data['judul'] = "Rekap Perjalanan Dinas" ;
+
+            $data['perjalanan'] = $this->Perjalanan_model->getDataPerjalan() ;
+
             $this->load->view('temp/header', $data) ;
             $this->load->view('perjalanan/index') ;
             $this->load->view('temp/footer') ;

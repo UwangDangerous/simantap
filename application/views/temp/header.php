@@ -25,7 +25,7 @@
 
 
     </head> 
-    <body >
+    <body>
     
         <nav class="navbar navbar-expand-md fixed-top navbar-dark my-bg-navbar p-2">
             <!-- <div class="container"> -->
