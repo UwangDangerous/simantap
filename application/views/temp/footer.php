@@ -1,9 +1,5 @@
 
-
-            </section>
-        </div>
-
-
+        <!-- <script src="<?//= base_url(); ?>assets/bootstrap/js/bootstrap.js" ></script> -->
         <script src="<?= base_url(); ?>assets/bootstrap/js/bootstrap.bundle.js" ></script>
         <script src="<?= base_url(); ?>assets/js/script.js" ></script>
 
@@ -16,7 +12,7 @@
 
         <script>
             $(document).ready(function() {
-                $('#tabel').dataTable();
+                $('#myTable').dataTable();
             } );
         </script>
 
