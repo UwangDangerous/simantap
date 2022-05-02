@@ -11,13 +11,25 @@
             <div class='text-center'>
                 <img src="<?= base_url();?>assets/img/logo.png" alt=""> <br>
                 <br>
+
                 <h5>Silahkan Login</h5>
             </div>
 
             <div class="container">
+                <?php if(!empty($this->session->flashdata('login') )) : ?>
+                    
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <?=  $this->session->flashdata('login'); ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <br>
+                <?php endif ; ?>
+                
                 <form action="" method="post">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" class='form-control col-form-label-sm' placeholder="Username" autocomplete='off'>
+                    <label for="username">Username / Email</label>
+                    <input type="text" name="username" id="username" class='form-control col-form-label-sm' placeholder="Username / Email" autocomplete='off'>
                     <small id="usernameHelp" class="form-text text-danger"><?= form_error('username'); ?></small>
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class='form-control col-form-label-sm' placeholder="Password">

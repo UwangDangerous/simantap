@@ -29,8 +29,14 @@
                     $this->Login_model->cekLogin($name, $pass) ;
                 }
             }else{
-                redirect("") ;
+                redirect("login") ;
             }
+        }
+
+        public function logout()
+        {
+            $this->session->sess_destroy() ;
+            redirect("login") ;
         }
     }
 

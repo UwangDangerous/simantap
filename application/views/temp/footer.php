@@ -12,7 +12,7 @@
 
         <script>
             $(document).ready(function() {
-                $('#myTable').dataTable();
+                $('#tabel').dataTable();
             } );
         </script>
 
