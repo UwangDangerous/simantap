@@ -22,11 +22,13 @@ body{
     position: fixed;
     height: 100% !important;
     background-color: white;
+    width: 30%;
 }
 
 #form-login img{
     height: 130px;
     margin-top: 70px;
+    margin : auto ;
     /* text-align: center; */
 }
 
@@ -62,6 +64,7 @@ body{
 
     #form-login {
         position: relative;
+        width: 100%;
     }
 
     .bottomright{

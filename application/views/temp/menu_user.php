@@ -19,9 +19,33 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-user-tie"></i></div>
                     Pemasok
                 </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/sdm">
+                    <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
+                    SDM
+                </a>
             </nav>
         </div>
     <!-- master data -->
+
+    <!-- produk -->
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produk" aria-expanded="false" aria-controls="produk">
+            <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
+                Produk
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="produk" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" href="<?= base_url(); ?>admin/produk">
+                    <div class="sb-nav-link-icon"><i class="fab fa-dropbox"></i></div>
+                    Daftar Produk
+                </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/barangMasuk">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cart-plus"></i></div>
+                    Barang Masuk
+                </a>
+            </nav>
+        </div>
+    <!-- produk -->
 
 
 

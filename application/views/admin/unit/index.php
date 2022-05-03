@@ -19,7 +19,7 @@
     <?php endif ; ?>
     
     <div class="table-responsive">
-        <table class="table table-bordered table-hover text-center" id="tabel">
+        <table class="table table-sm table-bordered table-hover text-center" id="tabel">
             <thead>
                 <tr>
                     <th width='10%'>No</th>
