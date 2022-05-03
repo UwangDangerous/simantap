@@ -23,6 +23,8 @@
 
         <link rel="stylesheet" href="<?=base_url(); ?>assets/css/mystyle.css">
 
+        <script src="<?= base_url(); ?>assets/tinymce/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+
     </head> 
     <body >
                         

@@ -16,5 +16,23 @@
             } );
         </script>
 
+        <script src="<?= base_url(); ?>assets/js/jquery-chained.min.js"></script>
+        
+
+
+        <script>
+            $("#provinsi").click(function(){
+                $("#kota").chained("#provinsi");
+            });
+        </script>
+
+        <script>
+            tinymce.init({
+                selector: '#timy' ,
+                plugins: "lists,charmap,preview ",
+                toolbar: 'numlist bullist bold italic underline superscript subscript align charmap preview'
+            });
+        </script>
+
     </body>
 </html>

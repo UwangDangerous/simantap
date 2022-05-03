@@ -15,8 +15,8 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-wrench"></i></div>
                     Unit
                 </a>
-                <a class="nav-link" href="<?= base_url(); ?>admin/pemasok">
-                    <div class="sb-nav-link-icon"><i class="fa fa-wrench"></i></div>
+                <a class="nav-link" href="<?= base_url(); ?>admin/perusahaan">
+                    <div class="sb-nav-link-icon"><i class="fa fa-user-tie"></i></div>
                     Pemasok
                 </a>
             </nav>
