@@ -7,6 +7,7 @@
             $this->load->library('form_validation');
             $this->load->model('BarangMasuk_model') ;
             $this->load->model("_Date") ; 
+            $this->load->model("_Code") ; 
         }
 
         public function index()
@@ -84,6 +85,69 @@
         {
             $this->BarangMasuk_model->hapusData($id) ;
         }
+        
+
+
+
+
+
+
+
+        // ============================================================================================================
+            public function detail($id)
+            {
+                if( $this->session->userdata('kunci') != null ){
+                    $data['judul'] = 'Rincian Barang Masuk '; 
+                    $data['header'] = 'Rincian Barang Masuk'; 
+                    $data['bread'] = '
+                    
+                        <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="'.base_url().'admin/barangMasuk">Barang Masuk</a></li>
+                        <li class="breadcrumb-item active"><a>Rincian</a></li>
+                    
+                    '; 
+
+                    $data['brg'] = $this->BarangMasuk_model->getDetailBarangMasuk($id) ;
+                    $data['item'] = $this->BarangMasuk_model->getDataBarangMasukItem($id) ;
+                    
+                    $this->load->view('temp/header',$data) ;
+                    $this->load->view('temp/dsbHeader') ;
+                    $this->load->view('admin/barang_masuk/detail') ;
+                    $this->load->view('temp/dsbFooter') ;
+                    $this->load->view('temp/footer') ;
+                }else{
+                    $this->session->set_flashdata("login", "Silahkan Login Kembali");
+                    redirect("login") ;
+                }
+            }
+
+            public function ubahItem($id, $id_brg)
+            {
+                $query = [
+                    "jumlah_brg_masuk" => $this->input->post("jumlah_brg_masuk_$id") ,
+                    "harga_satuan" => $this->input->post("harga_satuan_$id") ,
+                    "subtotal" => $this->input->post("subtotal_$id") 
+                ] ;
+
+                $this->db->where('id_brg_masuk_item', $id) ;
+                $this->db->set($query) ;
+                if($this->db->update('brg_masuk_item')) {
+                    $pesan = [
+                        'pesan' => 'Item Berhasil Diubah' ,
+                        'warna' => 'success' 
+                    ];
+                }else{
+                    $pesan = [
+                        'pesan' => 'Item Gagal Diubah' ,
+                        'warna' => 'danger' 
+                    ];
+                }
+
+                $this->session->set_flashdata($pesan) ;
+                redirect("admin/BarangMasuk/detail/$id_brg");
+            }
+        // ============================================================================================================
     }
+
 
 ?>

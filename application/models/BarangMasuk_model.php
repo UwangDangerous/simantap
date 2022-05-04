@@ -4,8 +4,6 @@
         public function getDataBarangMasuk()
         {
             $this->db->join('perusahaan','perusahaan.id_perusahaan = brg_masuk.id_perusahaan') ;
-            $this->db->join('a_kota','a_kota.id_kota = perusahaan.kota') ;
-            $this->db->join('a_provinsi', 'a_provinsi.id_prov = a_kota.id_prov') ;
             return $this->db->get('brg_masuk')->result_array();
         }
 
@@ -13,6 +11,23 @@
         {
             $this->db->where('id_user', $id) ;
             return $this->db->get('user')->row_array();
+        }
+
+        public function getDetailBarangMasuk($id)
+        {
+            $this->db->where('brg_masuk.id_brg_masuk', $id) ;
+            $this->db->join('perusahaan','perusahaan.id_perusahaan = brg_masuk.id_perusahaan') ;
+            $this->db->join('a_kota','a_kota.id_kota = perusahaan.kota') ;
+            $this->db->join('a_provinsi', 'a_provinsi.id_prov = a_kota.id_prov') ;
+            return $this->db->get('brg_masuk')->row_array();
+        }
+
+        public function getDataBarangMasukItem($id)
+        {
+            $this->db->where('id_brg_masuk', $id) ;
+            $this->db->join('barang','barang.id_barang = brg_masuk_item.id_barang') ;
+            $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
+            return $this->db->get('brg_masuk_item')->result_array() ;
         }
 
         public function simpanData(){
