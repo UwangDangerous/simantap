@@ -13,7 +13,8 @@
     
                 $sesi = [
                     'kunci' => $query['id_user'] ,
-                    'nama_user' => $query['nama_depan'].' '.$query['nama_blakang'] 
+                    'nama_user' => $query['nama_depan'].' '.$query['nama_blakang'],
+                    'namaLevel' => $query['nama_blakang']
                 ] ;
                 $this->session->set_userdata($sesi);
                 redirect('home');

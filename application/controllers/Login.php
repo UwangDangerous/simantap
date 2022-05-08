@@ -29,7 +29,7 @@
                     $this->Login_model->cekLogin($name, $pass) ;
                 }
             }else{
-                redirect("login") ;
+                redirect("home") ;
             }
         }
 

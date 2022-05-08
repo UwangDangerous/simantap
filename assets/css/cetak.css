@@ -1,0 +1,27 @@
+#header{
+    width: 100%;
+    padding-left:200px;
+}
+
+#header-masuk{
+    margin-top: 10px;
+    /* background-color: rgb(202, 202, 202); */
+    width: 100%;
+    padding: 10px;
+    /* height: 50px; */
+}
+
+#tabel-informasi table{
+    width: 100%;
+}
+
+#tabel-item table{
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+
+#tanda-tangan{
+    margin-left: 450px;
+    text-align: center;
+}

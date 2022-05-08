@@ -4,13 +4,14 @@
         public function getDataBarangMasuk()
         {
             $this->db->join('perusahaan','perusahaan.id_perusahaan = brg_masuk.id_perusahaan') ;
+            $this->db->order_by('id_brg_masuk','desc') ;
             return $this->db->get('brg_masuk')->result_array();
         }
 
         public function getDataBarangMasukEdit($id)
         {
-            $this->db->where('id_user', $id) ;
-            return $this->db->get('user')->row_array();
+            $this->db->where('id_brg_masuk', $id) ;
+            return $this->db->get('brg_masuk')->row_array();
         }
 
         public function getDetailBarangMasuk($id)
@@ -30,32 +31,32 @@
             return $this->db->get('brg_masuk_item')->result_array() ;
         }
 
-        public function simpanData(){
-            $this->load->helper('security') ;
-            $pass = do_hash('Simantap123!@', 'sha1') ;
+        public function simpanData($id){
+            $this->load->model("_Upload") ;
+            $berkas = $this->_Upload->uploadBerkasAjax('berkas', 'berkas','pdf', 'tambah_item') ;
             $query = [
-                'username' => $this->input->post('email') ,
-                'password' => $pass ,
-                'email' => $this->input->post('email') ,
-                'aktif' => 1,
-                'nama_depan' => $this->input->post('nama_depan') ,
-                'nama_blakang' => $this->input->post('nama_blakang') 
+                'id_brg_masuk' => $id ,
+                'kode_brg_masuk' => $this->input->post('kode_brg_masuk') ,
+                'tgl_brg_masuk' => $this->input->post('tgl_brg_masuk').' '.date("G:i:s") ,
+                'id_perusahaan' => $this->input->post('id_perusahaan') ,
+                'note' => $this->input->post('note') ,
+                'total' => 0,
+                'berkas' => $berkas 
             ] ;
 
-            if($this->db->insert('user', $query)) {
+            if($this->db->insert('brg_masuk', $query)){
                 $pesan = [
-                    'pesan' => 'Data Berhasil Disimpan' ,
-                    'warna' => 'success'
-                ];
+                    'pesan_tambah_item' => 'Data Berhasil Disimpan' ,
+                    'warna_tambah_item' => 'success'
+                ] ;
             }else{
                 $pesan = [
-                    'pesan' => 'Data Gagal Disimpan' ,
-                    'warna' => 'danger'
-                ];
+                    'pesan_tambah_item' => 'Data Gagal Disimpan' ,
+                    'warna_tambah_item' => 'danger'
+                ] ;
             }
-            $this->session->set_flashdata($pesan) ;
-            redirect("admin/sdm") ;
 
+            $this->session->set_flashdata($pesan) ;
         }
 
         public function ubahData($id){
@@ -87,8 +88,11 @@
         }
 
         public function hapusData($id){
-            $this->db->where('id_user',$id) ;
-            if($this->db->delete('user')) {
+            $this->db->where('id_brg_masuk',$id) ;
+            if($this->db->delete('brg_masuk')) {
+                
+                $this->db->where('id_brg_masuk', $id) ;
+                $this->db->delete('brg_masuk_item') ;
                 $pesan = [
                     'pesan' => 'Data Berhasil Dihapus' ,
                     'warna' => 'success'
@@ -100,7 +104,7 @@
                 ];
             }
             $this->session->set_flashdata($pesan) ;
-            redirect("admin/sdm") ;
+            redirect("admin/barangMasuk") ;
         }
     }
 

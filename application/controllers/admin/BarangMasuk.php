@@ -8,6 +8,7 @@
             $this->load->model('BarangMasuk_model') ;
             $this->load->model("_Date") ; 
             $this->load->model("_Code") ; 
+            date_default_timezone_set('Asia/Jakarta');
         }
 
         public function index()
@@ -37,22 +38,20 @@
 
         public function aksi($id = 0) 
         {
-            if($id == 0){
-                $aksi = 'Tambah Data' ;
-                $load = 'tambah';
-            }else{
-                $aksi = 'Ubah Data' ;
-                $load = 'ubah' ;
-                $data['sdm'] = $this->BarangMasuk_model->getDataBarangMasukEdit($id) ;
-            }
+            $this->db->order_by('id_brg_masuk', 'desc') ;
+            $data['idNext'] = $this->db->get('brg_masuk')->row_array()['id_brg_masuk'] + 1 ;
+            $data['pemasok'] = $this->db->get('perusahaan')->result_array() ;
+
+            $aksi = 'Tambah Data' ;
+            $load = 'tambah';
 
             if( $this->session->userdata('kunci') != null ){
-                $data['judul'] = 'SDM '; 
-                $data['header'] = 'SDM'; 
+                $data['judul'] = 'Barang Masuk '; 
+                $data['header'] = 'Barang Masuk'; 
                 $data['bread'] = '
                 
                     <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
-                    <li class="breadcrumb-item"><a href="'.base_url().'admin/sdm">BarangMasuk</a></li>
+                    <li class="breadcrumb-item"><a href="'.base_url().'admin/barangMasuk">BarangMasuk</a></li>
                     <li class="breadcrumb-item active"><a>'.$aksi.'</a></li>
                 
                 '; 
@@ -65,15 +64,11 @@
 
                     $this->load->view('temp/header',$data) ;
                     $this->load->view('temp/dsbHeader') ;
-                    $this->load->view("admin/sdm/$load") ;
+                    $this->load->view("admin/barang_masuk/$load") ;
                     $this->load->view('temp/dsbFooter') ;
                     $this->load->view('temp/footer') ;
                 }else{
-                    if($id == 0){
-                        $this->BarangMasuk_model->simpanData() ;
-                    }else{
-                        $this->BarangMasuk_model->ubahData($id) ;
-                    }
+                    $this->BarangMasuk_model->simpanData() ;
                 }
             }else{
                 $this->session->set_flashdata("login", "Silahkan Login");
@@ -85,7 +80,7 @@
         {
             $this->BarangMasuk_model->hapusData($id) ;
         }
-        
+
 
 
 
@@ -109,6 +104,9 @@
 
                     $data['brg'] = $this->BarangMasuk_model->getDetailBarangMasuk($id) ;
                     $data['item'] = $this->BarangMasuk_model->getDataBarangMasukItem($id) ;
+
+                    $this->load->model("Produk_model") ;
+                    $data['barang'] = $this->Produk_model->getDataProduk() ;
                     
                     $this->load->view('temp/header',$data) ;
                     $this->load->view('temp/dsbHeader') ;
@@ -146,7 +144,171 @@
                 $this->session->set_flashdata($pesan) ;
                 redirect("admin/BarangMasuk/detail/$id_brg");
             }
+
+            public function tambahItem($id)
+            {
+                $hs = $this->input->post('harga_satuan') ;
+                $jml = $this->input->post('jumlah_brg_masuk') ;
+                $t = $hs * $jml ;
+                $query = [
+                    'id_brg_masuk' => $id ,
+                    'id_barang' => $this->input->post('id_barang'),
+                    'harga_satuan' => $hs,
+                    'jumlah_brg_masuk' => $jml,
+                    'subtotal' => $t 
+                ] ;
+
+                // var_dump($query) ; die;
+
+                if($this->db->insert('brg_masuk_item', $query)) {
+                    $pesan = [
+                        'pesan' => 'Item Berhasil Ditambah',
+                        'warna' => 'success'
+                    ];
+                }else{
+                    $pesan = [
+                        'pesan' => 'Item Gagal Ditambah',
+                        'warna' => 'danger'
+                    ]; 
+                }
+                
+                $this->session->set_flashdata($pesan) ;
+                redirect("admin/barangMasuk/detail/$id") ;
+            }
+
+            public function hapusItem($id, $idMasuk) 
+            {
+                $this->db->where('id_brg_masuk_item', $id) ;
+                if($this->db->delete('brg_masuk_item')) {
+                    $pesan = [
+                        'pesan' => 'Item Berhasil DiHapus',
+                        'warna' => 'success'
+                    ];
+                }else{
+                    $pesan = [
+                        'pesan' => 'Item Gagal DiHapus',
+                        'warna' => 'danger'
+                    ]; 
+                }
+
+                $this->session->set_flashdata($pesan) ;
+                redirect("admin/barangMasuk/detail/$idMasuk") ;
+            }
+
+            public function sesuaikanTotal($id, $total) 
+            {
+                $this->db->where('id_brg_masuk', $id) ;
+                $this->db->set('total', $total) ;
+                if($this->db->update('brg_masuk')) {
+                    $pesan = [
+                        'pesan' => 'Data Berhasil Disimpan',
+                        'warna' => 'success'
+                    ];
+                }else{
+                    $pesan = [
+                        'pesan' => 'Data Gagal Disimpan',
+                        'warna' => 'danger'
+                    ]; 
+                }
+
+                $this->session->set_flashdata($pesan) ;
+                redirect("admin/barangMasuk/detail/$id") ;
+            }
+
         // ============================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // with ajax
+        public function tambahBarangMasuk($id)
+        {
+            $this->BarangMasuk_model->simpanData($id) ;
+            $this->tambahItemBarang($id) ;
+        }
+
+        public function tambahItemBarang($id)
+        {
+            $this->load->model('_Date') ;
+
+            $data['id'] = $id ;
+            $data['barang'] = $this->db->get('barang')->result_array() ;
+
+            $this->db->where('id_brg_masuk', $id) ;
+            $this->db->join('barang','barang.id_barang = brg_masuk_item.id_barang') ;
+            $this->db->join('unit','unit.id_unit = barang.id_unit') ;
+            $data['item'] = $this->db->get('brg_masuk_item')->result_array() ;
+            
+            $this->load->view('admin/barang_masuk/tambah/item', $data) ;
+        }
+
+        public function simpanItemBarang($id)
+        {
+            $hs = $this->input->post('harga_satuan') ;
+            $jml = $this->input->post('jumlah_brg_masuk') ;
+            $t = $hs * $jml ;
+            $query = [
+                'id_brg_masuk' => $id ,
+                'id_barang' => $this->input->post('id_barang'),
+                'harga_satuan' => $hs,
+                'jumlah_brg_masuk' => $jml,
+                'subtotal' => $t 
+            ] ;
+
+            // var_dump($query) ;
+            $this->db->insert('brg_masuk_item', $query) ;
+
+            $total = $t + $this->input->post('total') ;
+
+            $this->db->where('id_brg_masuk', $id) ;
+            $this->db->set('total' , $total) ;
+            $this->db->update('brg_masuk') ;
+
+            $this->session->set_flashdata(
+                [
+                    'pesan_tambah_item' => 'Item Pemesanan Berhasil Ditambah' ,
+                    'warna_tambah_item' => 'success' 
+                ]
+            );
+            $this->tambahItemBarang($id) ;
+        }
+        
+        public function hapusItemBarang($id,$item,$total, $subTotal) 
+        {
+            $this->db->where('id_brg_masuk_item', $item) ;
+            $this->db->delete('brg_masuk_item') ;
+
+            $t = $total - $subTotal ;
+            $this->db->where('id_brg_masuk', $id) ;
+            $this->db->set('total', $t) ;
+            $this->db->update('brg_masuk') ;
+
+            $this->session->set_flashdata(
+                [
+                    'pesan_tambah_item' => 'Item Berhasil Dihapus',
+                    'warna_tambah_item' => 'success'
+                ]
+            );
+            
+            $this->tambahItemBarang($id) ;
+        }
     }
 
 

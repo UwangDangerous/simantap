@@ -25,6 +25,27 @@
             }
         }
 
+        public function file($id = 0)
+        {
+            // $this->db->where('id_brg_masuk', $id) ;
+            // $berkas = $this->db->get('brg_masuk')->row_array() ;
+            // $berkas = $berkas['berkas'] ;
+            // // var_dump($berkas) ; die;
+            // // var_dump(file_exists("./berkas/$berkas")) ; die;
+            // if (file_exists("./berkas/$berkas") == false) {
+            //     $this->load->helper('download');
+            //     force_download("http://localhost/simantap_2/berkas/$berkas", null);
+            //     exit();
+            // }
+            // $this->session->set_flashdata( 
+            //     [
+            //         'pesan' => 'Berkas Kosong',
+            //         'warna' => 'danger'
+            //     ]
+            // );
+            // redirect($_SERVER['HTTP_REFERER']);
+        }
+
         
 
     }

@@ -34,5 +34,16 @@
             });
         </script>
 
+        <!-- js untuk select2  -->
+        <script src="<?= base_url(); ?>assets/jsDelivr/jsDelivr_select.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#flexibel").select2({
+                    theme: 'bootstrap4',
+                    placeholder: "--Pilih--"
+                });
+            });
+        </script>
+
     </body>
 </html>
