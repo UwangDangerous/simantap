@@ -11,7 +11,7 @@
 
         public function index()
         {
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'Dashboard '; 
                 $data['header'] = 'Dashboard'; 
                 $data['bread'] = '
@@ -45,7 +45,7 @@
                 $data['prsh'] = $this->Perusahaan_model->getDataPerusahaanEdit($id) ;
             }
 
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'Pemasok '; 
                 $data['header'] = 'Pemasok'; 
                 $data['bread'] = '

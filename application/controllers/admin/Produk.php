@@ -10,7 +10,7 @@
 
         public function index()
         {
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'Daftar Produk '; 
                 $data['header'] = 'Daftar Produk'; 
                 $data['bread'] = '
@@ -44,7 +44,7 @@
                 $data['produk'] = $this->Produk_model->getDataProdukEdit($id) ;
             }
 
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'Produk '; 
                 $data['header'] = 'Produk'; 
                 $data['bread'] = '

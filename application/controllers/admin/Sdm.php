@@ -10,7 +10,7 @@
 
         public function index()
         {
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'SDM '; 
                 $data['header'] = 'SDM'; 
                 $data['bread'] = '
@@ -44,7 +44,7 @@
                 $data['sdm'] = $this->Sdm_model->getDataSdmEdit($id) ;
             }
 
-            if( $this->session->userdata('kunci') != null ){
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
                 $data['judul'] = 'SDM '; 
                 $data['header'] = 'SDM'; 
                 $data['bread'] = '

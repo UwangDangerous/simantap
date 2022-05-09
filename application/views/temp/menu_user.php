@@ -25,6 +25,7 @@
                 </a>
             </nav>
         </div>
+    </a>
     <!-- master data -->
 
     <!-- produk -->
@@ -43,8 +44,13 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-cart-plus"></i></div>
                     Barang Masuk
                 </a>
+                <a class="nav-link" href="<?= base_url(); ?>user/alatGelas">
+                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    Alat Gelas
+                </a>
             </nav>
         </div>
+    </a>
     <!-- produk -->
 
 
@@ -73,5 +79,24 @@
         </div>
     <!-- Akun -->
 <?php else : ?>
+
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produk" aria-expanded="false" aria-controls="produk">
+            <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
+                Produk
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="produk" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" href="<?= base_url(); ?>user/barang">
+                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    Permintaan Barang
+                </a>
+                <a class="nav-link" href="<?= base_url(); ?>user/alatGelas">
+                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    Alat Gelas
+                </a>
+            </nav>
+        </div>
+    </a>
 
 <?php endif ; ?>
