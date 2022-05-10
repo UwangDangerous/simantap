@@ -44,6 +44,10 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-cart-plus"></i></div>
                     Barang Masuk
                 </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/barangKeluar">
+                    <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                    Barang Keluar
+                </a>
                 <a class="nav-link" href="<?= base_url(); ?>user/alatGelas">
                     <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
                     Alat Gelas

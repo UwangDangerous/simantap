@@ -1,7 +1,7 @@
 <div class="card p-3">
     <div class="row">
         <div class="col">
-            <a href="" class="btn btn-primary">Buat Permintaan Barang</a>
+            <a href="<?= base_url(); ?>user/barang/tambah" class="btn btn-primary">Buat Permintaan Barang</a>
         </div>
         <br>
         <br>
