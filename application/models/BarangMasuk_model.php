@@ -32,15 +32,18 @@
         }
 
         public function simpanData($id){
-            $this->load->model("_Upload") ;
-            $berkas = $this->_Upload->uploadBerkasAjax('berkas', 'berkas','pdf', 'tambah_item') ;
+            if($_FILES['berkas']['name']) {
+                $this->load->model("_Upload") ;
+                $berkas = $this->_Upload->uploadBerkasAjax('berkas', 'berkas','pdf', 'tambah_item') ;
+            }else{
+                $berkas = '' ;
+            }
             $query = [
                 'id_brg_masuk' => $id ,
                 'kode_brg_masuk' => $this->input->post('kode_brg_masuk') ,
                 'tgl_brg_masuk' => $this->input->post('tgl_brg_masuk').' '.date("G:i:s") ,
                 'id_perusahaan' => $this->input->post('id_perusahaan') ,
                 'note' => $this->input->post('note') ,
-                'total' => 0,
                 'berkas' => $berkas 
             ] ;
 

@@ -34,7 +34,7 @@
     <h4>Tambah Item</h4>
     <form action="<?= base_url();?>admin/barangMasuk/tambahItem/<?= $brg['id_brg_masuk'] ;?>" method='post'>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-10">
                 <label for="flexibel">Deskripsi</label>
                 <select name="id_barang" id="flexibel" class='form-control'>
                     <option value="">--pilih--</option>
@@ -49,10 +49,6 @@
                 <input type="number" name="jumlah_brg_masuk" id="jumlah_brg_masuk" class='form-control'>
             </div>
 
-            <div class="col-md-4">
-                <label for="harga_satuan">Harga Satuan</label>
-                <input type="number" name="harga_satuan" id="harga_satuan" class='form-control' placeholder="Tulis Tanpa Titik/Koma">
-            </div>
             <div class="col-md-12 mt-3">
                 <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
@@ -82,8 +78,6 @@
                 <th>Deskripsi</th>
                 <th>Kuantitas</th>
                 <th>Satuan</th>
-                <th>Harga Satuan</th>
-                <th>Sub Total</th>
                 <th>Aksi</th>
             </tr>
             <?php $no=1 ; ?>
@@ -95,9 +89,6 @@
                     <td><?= $row['nama_barang']; ?></td>
                     <td><?= $row['jumlah_brg_masuk']; ?></td>
                     <td><?= $row['nama_unit']; ?></td>
-                    <td><?= $this->_Date->rupiah( $row['harga_satuan'] ); ?></td>
-                    <td><?= $this->_Date->rupiah( $row['subtotal'] ) ; ?></td>
-                    <?php $total += $row['subtotal']; ?>
                     <td>
                         <a href="" class="badge badge-success" data-toggle='modal' data-target='#edit_item_<?= $id?>' data-toggle='tooltip' title='Ubah Item'><i class="fa fa-edit"></i></a>
                         <a href="<?= base_url(); ?>admin/barangMasuk/hapusItem/<?= $id; ?>/<?= $brg['id_brg_masuk'] ;?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Item' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
@@ -119,12 +110,6 @@
                                     <input type="text" id="nama_barang" class='form-control' disabled value="<?= $row['nama_barang'];?>">
                                     <label for="jumlah_brg_masuk_<?= $id;?>" class='mt-3'>Kuantitas</label>
                                     <input type="number" name="jumlah_brg_masuk_<?= $id;?>" id="jumlah_brg_masuk_<?= $id;?>" class='form-control' value="<?= $row['jumlah_brg_masuk'];?>">
-                                    <label for="harga_satuan_<?= $id;?>" class='mt-3'>Harga Satuan</label>
-                                    <input type="number" name="harga_satuan_<?= $id;?>" id="harga_satuan_<?= $id;?>" class='form-control' value="<?= $row['harga_satuan'];?>" >
-                                    <label for="subtotal_<?= $id;?>" class='mt-3'>Sub Total</label>
-                                    <div id="st_<?= $id;?>">
-                                        <input type="text" name="subtotal_<?= $id;?>" id="subtotal_<?= $id;?>" class='form-control' value="<?= $row['subtotal'];?>">
-                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Ubah</button>
@@ -135,51 +120,7 @@
                     </div>
                 </div>
 
-                <script>
-                    var jml = 0; 
-                    var hs = 0;
-                    var k = 0 ;
-                    $("#harga_satuan_<?= $id;?>").keyup(function(){
-                        var hs = $("#harga_satuan_<?= $id;?>").val()  ;
-                        var k = $("#jumlah_brg_masuk_<?= $id;?>").val() ;
-                        if(hs != '' && k != '') {
-                            jml =  parseInt( $("#harga_satuan_<?= $id;?>").val() ) * parseInt(k) ;
-                        }else{
-                            jml = 0 ;
-                        }
-                        $("#subtotal_<?= $id;?>").val(jml) ;
-                        // $("#st_<?//= $id;?>").html(`
-                        //     <input type="number" name="subtotal_<?//= $id;?>" id="subtotal_<?//= $id;?>" class='form-control' value="`+jml+`">
-                        // `);
-                        
-                    }) ;
-
-                    $("#jumlah_brg_masuk_<?= $id;?>").keyup(function(){
-                        var hs = $("#harga_satuan_<?= $id;?>").val()  ;
-                        var k = $("#jumlah_brg_masuk_<?= $id;?>").val() ;
-                        if(hs != '' && k != '') {
-                            jml =  parseInt( $("#jumlah_brg_masuk_<?= $id;?>").val() ) * parseInt(hs) ;
-                        }else{
-                            jml =  0 ;
-                        }
-                        $("#subtotal_<?= $id;?>").val(jml) ;
-
-                    }) ;
-                </script>
             <?php endforeach ; ?>
-            <tr>
-                <th class='align-middle' colspan=5> Total </th>
-                <?php if( $brg['total'] != $total) : ?>
-                    <th class='align-middle'> 
-                        <span class="text-danger"> <?= $this->_Date->rupiah( $brg['total'] ); ?> </span> <br>
-                        <?= $this->_Date->rupiah($total); ?>
-                    </th>
-                    <th class='align-middle'><a href="<?= base_url(); ?>admin/barangMasuk/sesuaikanTotal/<?= $brg['id_brg_masuk']; ?>/<?= $total; ?>" class="badge badge-success" onclick="return confirm('Sesuaikan Total?')">Sesuaikan</a></th>
-                <?php else : ?>
-                    <th class='align-middle'><?= $this->_Date->rupiah($total); ?></th>
-                    <th class='align-middle'><span class="text-success">Total Sesuai</span></th>
-                <?php endif ; ?>
-            </tr>
         </thead>
     </table>
 

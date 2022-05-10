@@ -122,9 +122,7 @@
             public function ubahItem($id, $id_brg)
             {
                 $query = [
-                    "jumlah_brg_masuk" => $this->input->post("jumlah_brg_masuk_$id") ,
-                    "harga_satuan" => $this->input->post("harga_satuan_$id") ,
-                    "subtotal" => $this->input->post("subtotal_$id") 
+                    "jumlah_brg_masuk" => $this->input->post("jumlah_brg_masuk_$id") 
                 ] ;
 
                 $this->db->where('id_brg_masuk_item', $id) ;
@@ -153,9 +151,7 @@
                 $query = [
                     'id_brg_masuk' => $id ,
                     'id_barang' => $this->input->post('id_barang'),
-                    'harga_satuan' => $hs,
-                    'jumlah_brg_masuk' => $jml,
-                    'subtotal' => $t 
+                    'jumlah_brg_masuk' => $jml
                 ] ;
 
                 // var_dump($query) ; die;
@@ -193,26 +189,6 @@
 
                 $this->session->set_flashdata($pesan) ;
                 redirect("admin/barangMasuk/detail/$idMasuk") ;
-            }
-
-            public function sesuaikanTotal($id, $total) 
-            {
-                $this->db->where('id_brg_masuk', $id) ;
-                $this->db->set('total', $total) ;
-                if($this->db->update('brg_masuk')) {
-                    $pesan = [
-                        'pesan' => 'Data Berhasil Disimpan',
-                        'warna' => 'success'
-                    ];
-                }else{
-                    $pesan = [
-                        'pesan' => 'Data Gagal Disimpan',
-                        'warna' => 'danger'
-                    ]; 
-                }
-
-                $this->session->set_flashdata($pesan) ;
-                redirect("admin/barangMasuk/detail/$id") ;
             }
 
         // ============================================================================================================
@@ -261,25 +237,15 @@
 
         public function simpanItemBarang($id)
         {
-            $hs = $this->input->post('harga_satuan') ;
             $jml = $this->input->post('jumlah_brg_masuk') ;
-            $t = $hs * $jml ;
             $query = [
                 'id_brg_masuk' => $id ,
                 'id_barang' => $this->input->post('id_barang'),
-                'harga_satuan' => $hs,
-                'jumlah_brg_masuk' => $jml,
-                'subtotal' => $t 
+                'jumlah_brg_masuk' => $jml
             ] ;
 
             // var_dump($query) ;
             $this->db->insert('brg_masuk_item', $query) ;
-
-            $total = $t + $this->input->post('total') ;
-
-            $this->db->where('id_brg_masuk', $id) ;
-            $this->db->set('total' , $total) ;
-            $this->db->update('brg_masuk') ;
 
             $this->session->set_flashdata(
                 [
@@ -290,15 +256,10 @@
             $this->tambahItemBarang($id) ;
         }
         
-        public function hapusItemBarang($id,$item,$total, $subTotal) 
+        public function hapusItemBarang($id,$item) 
         {
             $this->db->where('id_brg_masuk_item', $item) ;
             $this->db->delete('brg_masuk_item') ;
-
-            $t = $total - $subTotal ;
-            $this->db->where('id_brg_masuk', $id) ;
-            $this->db->set('total', $t) ;
-            $this->db->update('brg_masuk') ;
 
             $this->session->set_flashdata(
                 [

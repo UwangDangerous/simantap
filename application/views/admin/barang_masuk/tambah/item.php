@@ -18,7 +18,7 @@
     
     <form action="" method='post' id='form_tambah_item'>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <label for="flexibel1">Barang</label>
                 <select id="flexibel1" name="id_barang" class="form-control" >
                     <option value="">-pilih -</option>
@@ -27,24 +27,17 @@
                     <?php endforeach ; ?>
                 </select>
             </div>
-
-            <div class="col-md-2">
-                <label for="jumlah_brg_masuk">Jumlah Barang Masuk</label>
-                <input type="number" name="jumlah_brg_masuk" id="jumlah_brg_masuk" class='form-control'>
-            </div>
             
             <div class="col-md-4">
-                <label for="harga_satuan">Harga Satuan</label>
+                <label for="jumlah_brg_masuk">Jumlah Barang</label>
                 <div class="input-group mb-3">
-                    <input type="number" name="harga_satuan" id="harga_satuan" class='form-control' placeholder="ketik tanpa koma/titk">
+                    <input type="number" name="jumlah_brg_masuk" id="jumlah_brg_masuk" class='form-control'>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="submit" id="button-addon2">Simpan</button>
                     </div>
                 </div>
                 
             </div>
-
-            <div id="total_hidden"></div>
 
         </div>
     </form>
@@ -57,8 +50,6 @@
                     <th>No</th>
                     <th>Nama Barang</th>
                     <th>QTY</th>
-                    <th>Harga Satuan</th>
-                    <th>Subtotal</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -70,9 +61,6 @@
                         <td><?= $no++; ?></td>
                         <td><?= $i['nama_barang']; ?></td>
                         <td><?= $i['jumlah_brg_masuk']; ?> ( <?= $i['nama_unit']; ?> )</td>
-                        <td><?= $this->_Date->rupiah( $i['harga_satuan'] ); ?></td>
-                        <td><?= $this->_Date->rupiah( $i['subtotal'] ); ?></td>
-                        <?php $total += $i['subtotal'] ; ?>
                         <td><a href="#" id='form_hapus_item<?= $i['id_brg_masuk_item'];?>' data-toggle='tooltip' title='Hapus Item' class="badge badge-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
 
@@ -81,7 +69,7 @@
                             if(confirm("Hapus Item?")){
                                 e.preventDefault();
                                 $.ajax({
-                                    url: '<?= base_url(); ?>admin/barangMasuk/hapusItemBarang/<?= $id ;?>/<?= $i['id_brg_masuk_item'];?>/<?= $total;?>/<?= $i['subtotal'];?>',
+                                    url: '<?= base_url(); ?>admin/barangMasuk/hapusItemBarang/<?= $id ;?>/<?= $i['id_brg_masuk_item'];?>',
                                     type: 'post',
                                     data: $(this).serialize(),             
                                     success: function(data) {               
@@ -94,11 +82,6 @@
                         }) ;
                     </script>
                 <?php endforeach ; ?>
-                <tr>
-                    <th colspan=4>Total</th>
-                    <th><?= $this->_Date->rupiah( $total ); ?></th>
-                    <th>-</th>
-                </tr>
             </tbody>
         </table>
     </div>
@@ -124,7 +107,6 @@
         });
     }) ;
 
-    $("#total_hidden").html(`<input type="hidden" name='total' value='<?= $total ;?>'>`) ;
 </script>
 
 

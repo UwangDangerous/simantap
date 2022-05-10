@@ -76,8 +76,7 @@ $html = '
                 <th width=5%> No. </th>
                 <th width=45%> Deskripsi </th>
                 <th width=10%> Kuantitas </th>
-                <th width=20%> Biaya Satuan </th>
-                <th width=20%> Subtotal </th>
+                <th width=10%> Satuan </th>
             </tr> ';
             $no = 1 ;
             foreach($item_brg_masuk as $row) {
@@ -86,17 +85,12 @@ $html .= '
                 <td align=center> '.$no++.' </td>
                 <td> '.$row["nama_barang"].' </td>
                 <td align=center> '.$row['jumlah_brg_masuk'].' </td>
-                <td align=center> '. $this->_Date->rupiah( $row['harga_satuan'] ).' </td>
-                <td align=center> '. $this->_Date->rupiah( $row['subtotal'] ).' </td>
+                <td align=center> '.$row['nama_unit'].' </td>
             </tr> 
         ' ;
             }
 
 $html .= '
-            <tr>
-                <th colspan=4> Total </th>
-                <th> '. $this->_Date->rupiah( $barang_masuk['total'] ).' </th>
-            </tr>
         </table>
     </div>
 
