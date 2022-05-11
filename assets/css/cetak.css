@@ -11,6 +11,15 @@
     /* height: 50px; */
 }
 
+#header-keluar{
+    margin-top: 10px;
+    /* background-color: rgb(202, 202, 202); */
+    width: 100%;
+    padding: 10px;
+    font-size: 20pt;
+    /* height: 50px; */
+}
+
 #tabel-informasi table{
     width: 100%;
 }
@@ -24,4 +33,18 @@
 #tanda-tangan{
     margin-left: 450px;
     text-align: center;
+}
+
+#tanda-tangan-admin{
+    margin-left: 250px;
+    text-align: center; 
+    width: 200px;
+    float : left ;
+}
+
+#tanda-tangan-user{
+    width: 200px;
+    /* margin-left: 450px; */
+    text-align: center; 
+    float : left ;
 }

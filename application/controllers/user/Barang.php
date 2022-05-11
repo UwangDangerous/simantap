@@ -61,10 +61,38 @@
             }
         }
 
+        public function hapus($id) 
+        {
+            $this->db->where('id_brg_keluar', $id);
+            if($this->db->delete('brg_keluar')) {
+                $this->db->where('id_brg_keluar', $id) ;
+                $this->db->delete('brg_keluar_item') ;
+
+                $pesan = [
+                    'pesan' => "Data Berhasil Dihapus" ,
+                    'warna' => "success"
+                ];
+            }else{
+                $pesan = [
+                    'pesan' => "Data Gagal Dihapus",
+                    'warna' => 'danger'
+                ];
+            }
+
+            $this->session->set_flashdata($pesan) ;
+            redirect("user/barang") ;
+        }
+
         public function tambahBarangKeluar($id)
         {
             $this->BarangKeluar_model->user_simpanData($id) ;
             $this->tampilItemBarang($id) ;
+        }
+
+        public function tabelDetail($id)
+        {
+            $data['item'] = $this->BarangKeluar_model->getDataItemBarangKeluar($id) ;
+            $this->load->view('user/barang/detail', $data) ;
         }
 
         public function tampilItemBarang($id)
@@ -86,6 +114,14 @@
 
             $this->db->insert('brg_keluar_item', $query) ;
             $this->session->set_flashdata(['pesan' => 'Data Berhasil Disimpan' , 'warna' => 'success']) ;
+            $this->tampilItemBarang($id) ;
+        }
+
+        public function hapusItemKeluar($id, $item)
+        {
+            $this->db->where('id_brg_keluar_item', $item) ;
+            $this->db->delete('brg_keluar_item') ;
+            $this->session->set_flashdata(['pesan' => 'Data Berhasil Dihapus' , 'warna' => 'success']) ;
             $this->tampilItemBarang($id) ;
         }
     }

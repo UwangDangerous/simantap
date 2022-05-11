@@ -11,7 +11,7 @@
 
     <?php endif ; ?>
     <h3>
-        Item Pemesanan
+        Item Permintaan Barang
         <button class="btn btn-primary" type="button" data-toggle='tooltip' title='Segarkan' id="tombol-refresh-segarkan"><i class="fa fa-sync"></i></button>
     </h3>
     <form action="" method="post" id="tambahItemBarang">
@@ -51,10 +51,27 @@
                         <td><?= $i['nama_barang']; ?></td>
                         <td><?= $i['jumlah_brg_keluar']; ?> <?= $i['nama_unit']; ?></td>
                         <td>
-                            <a href="" class="badge badge-success" data-toggle='tooltip' title='ubah data'><i class="fa fa-edit"></i></a>
-                            <a href="" class="badge badge-danger" data-toggle='tooltip' title='ubah hapus'><i class="fa fa-trash"></i></a>
+                            <a href="" class="badge badge-danger" id="hapusItemBarang" data-toggle='tooltip' title='ubah hapus'><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
+
+                    <script>
+                        $("#hapusItemBarang").click(function (e){
+                            if(confirm("hapus data?")){
+                                    e.preventDefault();
+                                    $.ajax({
+                                        url: '<?= base_url(); ?>user/barang/hapusItemKeluar/<?= $id; ?>/<?= $i['id_brg_keluar_item']; ?>',
+                                        type: 'post',
+                                        data: $(this).serialize(),             
+                                        success: function(data) {               
+                                            $('#tombol_item').html(data) ;      
+                                        }
+                                    });
+                            }else{
+                                return false;
+                            }
+                        });
+                    </script>
                 <?php endforeach ; ?>
             </tbody>
         </table>

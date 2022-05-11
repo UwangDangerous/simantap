@@ -92,12 +92,16 @@
         <div class="collapse" id="produk" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
                 <a class="nav-link" href="<?= base_url(); ?>user/barang">
-                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    <div class="sb-nav-link-icon"><i class="fa fa-fas fa-shopping-cart"></i></div>
                     Permintaan Barang
                 </a>
-                <a class="nav-link" href="<?= base_url(); ?>user/alatGelas">
+                <a class="nav-link" href="<?= base_url(); ?>user/ag_kualitatif">
                     <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
-                    Alat Gelas
+                    Alat Gelas Kualitatif
+                </a>
+                <a class="nav-link" href="<?= base_url(); ?>user/ag_kuantitatif">
+                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    Alat Gelas Kuantitatif
                 </a>
             </nav>
         </div>
