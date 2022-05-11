@@ -16,20 +16,33 @@
     </h3>
     <form action="" method="post" id="tambahItemBarang">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-3">
+                <label for="kategori">Kategori</label>
+                <?php $kategori = $this->db->get('kategori')->result_array() ; ?>
+
+                <select name="kategori" id="kategori" class='form-control'>
+                    <option value="">--pilih--</option>
+                    <?php foreach ($kategori as $ktg) : ?>
+                        <option value="<?= $ktg['id_ktg'] ;?>"> <?= $ktg['nama_ktg']; ?> </option>
+                    <?php endforeach ; ?>
+                </select>
+
+            </div>
+            <div class="col-md-7">
                 <label for="flexibel1">Barang</label>
                 <select id="flexibel1" name="id_barang" class="form-control" >
                     <option value="">-pilih -</option>
                     <?php foreach ($barang as $b) : ?>
-                        <option value="<?= $b['id_barang'];?>"> <?= $b['nama_barang']; ?> </option>
+                        <option class='<?= $b['id_ktg'];?>' value="<?= $b['id_barang'];?>"> <?= $b['nama_barang']; ?> </option>
                     <?php endforeach ; ?>
                 </select>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2">
                 <label for="jumlah_brg_keluar">Jumlah Barang</label>
                 <input type="text" name="jumlah_brg_keluar" id="jumlah_brg_keluar" class='form-control'>
             </div>
         </div>
+        <br>
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
 
@@ -40,6 +53,7 @@
                     <th>No</th>
                     <th>Nama Barang</th>
                     <th>QTY</th>
+                    <th>Kategori</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -50,6 +64,7 @@
                         <td><?= $no++; ?></td>
                         <td><?= $i['nama_barang']; ?></td>
                         <td><?= $i['jumlah_brg_keluar']; ?> <?= $i['nama_unit']; ?></td>
+                        <td><?= $i['nama_ktg']; ?></td>
                         <td>
                             <a href="" class="badge badge-danger" id="hapusItemBarang" data-toggle='tooltip' title='ubah hapus'><i class="fa fa-trash"></i></a>
                         </td>
@@ -102,5 +117,14 @@
             theme: 'bootstrap4',
             placeholder: "--Pilih--"
         });
+    });
+    
+</script>
+
+
+<script src="<?= base_url(); ?>assets/js/jquery-chained.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#flexibel1").chained("#kategori");
     });
 </script>

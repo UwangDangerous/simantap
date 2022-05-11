@@ -3,7 +3,7 @@
     class AlatGelas_model extends CI_Model{
         public function getDataAlatGelas()
         {
-            $this->db->where('id_ktg', 2) ;
+            $this->db->where('id_ktg', 21) ;
             return $this->db->get('barang')->result_array() ;
         }
 

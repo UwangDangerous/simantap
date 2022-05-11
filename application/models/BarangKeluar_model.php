@@ -4,9 +4,8 @@
         // USER
             public function getDataBarang($ktg=0)
             {
-                if($ktg == 0){
-                    $this->db->where("'id_ktg' != '21' AND 'id_ktg' != '22'") ;
-                }
+                $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg', 'inner') ;
+                $this->db->order_by('nama_barang','asc') ;
                 return $this->db->get('barang')->result_array() ;
             }
 
@@ -35,6 +34,7 @@
                 ] ;
 
                 $this->db->insert('brg_keluar', $query) ;
+                // var_dump($query) ;
                 $this->session->set_flashdata(['pesan' => 'Data Berhasil Disimpan' , 'warna' => 'success']) ;
             }
 
@@ -44,7 +44,7 @@
                 $this->db->join('barang', 'barang.id_barang = brg_keluar_item.id_barang') ;
                 $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
                 $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg') ;
-                $this->db->select('id_brg_keluar, nama_unit, nama_barang, jumlah_brg_keluar, id_brg_keluar_item, nama_ktg') ;
+                $this->db->select('id_brg_keluar, nama_unit, nama_barang, jumlah_brg_keluar, id_brg_keluar_item, nama_ktg,konfirmasi') ;
                 return $this->db->get('brg_keluar_item')->result_array();
             }
         // USER

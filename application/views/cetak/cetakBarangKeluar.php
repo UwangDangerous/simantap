@@ -71,11 +71,17 @@ $html = '
     <div id="tabel-item">
         <table border=1 cellpadding=2>
             <tr>
-                <th width=5%> No. </th>
-                <th width=45%> Deskripsi </th>
-                <th width=10%> Kuantitas </th>
-                <th width=10%> Satuan </th>
-            </tr> ';
+                <th rowspan=2 width=5%> No. </th>
+                <th rowspan=2 width=45%> Deskripsi </th>
+                <th width=5% colspan=2> qty </th>
+                <th rowspan=2 width=10%> Satuan </th>
+            </tr> 
+            <tr> 
+                <th> Diminta </th>
+                <th> Terima </th>
+            </tr> 
+            
+            ';
             $no = 1 ;
             foreach($item_brg_keluar as $row) {
 $html .= '
@@ -83,6 +89,7 @@ $html .= '
                 <td align=center> '.$no++.' </td>
                 <td> '.$row["nama_barang"].' </td>
                 <td align=center> '.$row['jumlah_brg_keluar'].' </td>
+                <td align=center> </td>
                 <td align=center> '.$row['nama_unit'].' </td>
             </tr> 
         ' ;
