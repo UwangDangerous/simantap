@@ -73,7 +73,7 @@ $html = '
             <tr>
                 <th rowspan=2 width=5%> No. </th>
                 <th rowspan=2 width=45%> Deskripsi </th>
-                <th width=5% colspan=2> qty </th>
+                <th width=5% colspan=2> Kuantiti </th>
                 <th rowspan=2 width=10%> Satuan </th>
             </tr> 
             <tr> 
@@ -88,9 +88,13 @@ $html .= '
             <tr>
                 <td align=center> '.$no++.' </td>
                 <td> '.$row["nama_barang"].' </td>
-                <td align=center> '.$row['jumlah_brg_keluar'].' </td>
-                <td align=center> </td>
-                <td align=center> '.$row['nama_unit'].' </td>
+                <td align=center> '.$row['jumlah_brg_keluar'].' </td>';
+                if($row['konfirmasi'] > 0){
+$html .= '          <td align=center>'.$row['konfirmasi'].'</td>' ;
+                }else{
+$html .= '          <td></td>' ;
+                }
+$html .= '      <td align=center> '.$row['nama_unit'].' </td>
             </tr> 
         ' ;
             }

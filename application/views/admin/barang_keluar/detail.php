@@ -19,12 +19,17 @@
             <?= $this->_Code->getBarcodeSVG($brg['kode_brg_keluar']); ?> 
        
     </div>
+    <div class="col-4">
+        <?php if($brg['status']==1) : ?>
+            <i class="text-success">Transaksi Selesai</i>
+        <?php endif ; ?>
+    </div>
 </div>
 <br>
 
 <div class="card p-2">
     <h4>Tambah Item</h4>
-    <form action="<?= base_url();?>admin/barangMasuk/tambahItem/<?= $brg['id_brg_keluar'] ;?>" method='post'>
+    <form action="<?= base_url();?>admin/barangKeluar/tambahItem/<?= $brg['id_brg_keluar'] ;?>" method='post'>
         <div class="row">
             <div class="col-md-3">
                 <label for="kategori">Kategori</label>
@@ -75,56 +80,58 @@
 
 <br>
 <div class="table-responsive">
-    <table class="table table-bordered table-hover text-center">
+    <table class="table table-sm table-bordered table-hover text-center">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Deskripsi</th>
-                <th>Kuantitas</th>
-                <th>Satuan</th>
-                <th>Aksi</th>
+                <th class="align-middle" rowspan="2">No</th>
+                <th class="align-middle" rowspan="2">Deskripsi</th>
+                <th class="align-middle" colspan="2">Kuantitas</th>
+                <th class="align-middle" rowspan="2">Satuan</th>
+                <th class="align-middle" rowspan="2">Aksi</th>
+            </tr>
+            <tr>
+                <th class="align-middle">Diminta</th>
+                <th class="align-middle">Konfiramasi</th>
             </tr>
             <?php $no=1 ; ?>
             <?php $total = 0; ?>
-            <?php foreach ($item as $row) : ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <?php $id = $row['id_brg_keluar_item']; ?>
-                    <td><?= $row['nama_barang']; ?></td>
-                    <td><?= $row['jumlah_brg_keluar']; ?></td>
-                    <td><?= $row['nama_unit']; ?></td>
-                    <td>
-                        <a href="" class="badge badge-success" data-toggle='modal' data-target='#edit_item_<?= $id?>' data-toggle='tooltip' title='Ubah Item'><i class="fa fa-edit"></i></a>
-                        <a href="<?= base_url(); ?>admin/barangMasuk/hapusItem/<?= $id; ?>/<?= $brg['id_brg_keluar'] ;?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Item' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <!-- Modal Edit -->
-                <div class="modal fade" id="edit_item_<?= $id?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ubah Item</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form action="<?= base_url();?>admin/barangMasuk/ubahItem/<?= $id; ?>/<?= $brg['id_brg_keluar'];?>" method='post'>
-                                <div class="modal-body">
-                                    <label for="nama_barang">Deskripsi</label>
-                                    <input type="text" id="nama_barang" class='form-control' disabled value="<?= $row['nama_barang'];?>">
-                                    <label for="jumlah_brg_keluar_<?= $id;?>" class='mt-3'>Kuantitas</label>
-                                    <input type="number" name="jumlah_brg_keluar_<?= $id;?>" id="jumlah_brg_keluar_<?= $id;?>" class='form-control' value="<?= $row['jumlah_brg_keluar'];?>">
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-primary">Ubah</button>
-                                </div>
-                                
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <form action="<?= base_url(); ?>admin/barangKeluar/konfirmasi/<?= $brg['id_brg_keluar'];?>" method="post">
+                <?= $id_array = ''; ?>
+                <?php foreach ($item as $row) : ?>
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <?php $id = $row['id_brg_keluar_item']; ?>
+                        <?php $id_array .= $id.'|'; ?>
+                        <td><?= $row['nama_barang']; ?></td>
+                        <td><?= $row['jumlah_brg_keluar']; ?></td>
+                        <td>
+                            <?php if($row['konfirmasi'] == 0) : ?>
+                                <input type="number" name="konfirmasi_<?= $id;?>" value="<?= $row['jumlah_brg_keluar'];?>" class="form-control" style="width:100px; margin:auto">
+                            <?php else : ?>
+                                <?= $row['konfirmasi']; ?>
+                            <?php endif ; ?>
+                        </td>
+                        <td><?= $row['nama_unit']; ?></td>
+                        <td>
+                            <a href="<?= base_url(); ?>admin/barangKeluar/hapusItem/<?= $id; ?>/<?= $brg['id_brg_keluar'] ;?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Item' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+    
+                <?php endforeach ; ?>
 
-            <?php endforeach ; ?>
+                <?php if($brg['status']==0) : ?>
+                    
+                    <?php if($item) : ?>
+                        <tr>
+                            <input type="hidden" name='id_array' value="<?= trim($id_array,"|") ;?>">
+                            <th colspan=3></th>
+                            <th> <button type="submit" class="btn btn-primary" onclick="return confirm('Data Sudah Benar ?');">Konfirmasi</button> </th>
+                            <th colspan=2></th>
+                        </tr>
+                    <?php endif ; ?>
+
+                <?php endif ; ?>
+            </form>
         </thead>
     </table>
 
