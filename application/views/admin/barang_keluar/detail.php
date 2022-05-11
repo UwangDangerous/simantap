@@ -1,16 +1,5 @@
 <div class="row">
     <div class="col-4">
-        <b><?= $brg['nama_perusahaan']; ?></b> <br>
-        <?= $brg['alamat']; ?>
-        <br>
-        <?= $brg['pos']; ?><br>
-        <?= $brg['nama_kota']; ?>
-        <?= $brg['nama_prov']; ?> Indonesia
-        <br>
-        Telepon : <?= $brg['phone']; ?> <br>
-        Email : <?= $brg['email']; ?>
-    </div>
-    <div class="col-4">
         <b>PPPOMN-BMN</b> <br>
         Gudang BMN <br>
         Jalan Percetakan Negara Nomor 23 <br><br>
@@ -21,43 +10,47 @@
         Email: ppid@pom.go.id
     </div>
     <div class="col-4"> 
-        <b>
-            Referensi : <br>
-            <?= $brg['kode_brg_masuk']; ?> <br>
-            <?= $this->_Code->getBarcodeSVG($brg['kode_brg_masuk']); ?>
-        </b>
+        
+            <b>Tanggal :  </b> <br>
+            <?php $tanggal = explode(" ", $brg['tgl_brg_keluar']); ?>
+            <?= $this->_Date->formatTanggal( $tanggal[0] ); ?> <?= $tanggal[1]; ?><br>
+            <b>Referensi :  </b> <br>
+            <?= $brg['kode_brg_keluar']; ?> <br>
+            <?= $this->_Code->getBarcodeSVG($brg['kode_brg_keluar']); ?> 
+       
     </div>
 </div>
 <br>
 
 <div class="card p-2">
     <h4>Tambah Item</h4>
-    <form action="<?= base_url();?>admin/barangMasuk/tambahItem/<?= $brg['id_brg_masuk'] ;?>" method='post'>
+    <form action="<?= base_url();?>admin/barangMasuk/tambahItem/<?= $brg['id_brg_keluar'] ;?>" method='post'>
         <div class="row">
             <div class="col-md-3">
-                <?php $kategori = $this->db->get('kategori')->result_array() ;?>
-                
                 <label for="kategori">Kategori</label>
+                <?php $kategori = $this->db->get('kategori')->result_array() ; ?>
+
                 <select name="kategori" id="kategori" class='form-control'>
                     <option value="">--pilih--</option>
                     <?php foreach ($kategori as $ktg) : ?>
-                        <option value="<?= $ktg['id_ktg'];?>"><?= $ktg['nama_ktg']; ?></option>
+                        <option value="<?= $ktg['id_ktg'] ;?>"> <?= $ktg['nama_ktg']; ?> </option>
                     <?php endforeach ; ?>
                 </select>
+
             </div>
             <div class="col-md-7">
-                <label for="flexibel">Deskripsi</label>
-                <select name="id_barang" id="flexibel" class='form-control'>
-                    <option value="">--pilih--</option>
+                <label for="flexibel">Barang</label>
+                <select id="flexibel" name="id_barang" class="form-control" >
+                    <option value="">-pilih -</option>
                     <?php foreach ($barang as $b) : ?>
-                        <option class='<?= $b['id_ktg'] ;?>' value="<?= $b['id_barang']; ?>"> <?= $b['nama_barang']; ?> </option>
+                        <option class='<?= $b['id_ktg'];?>' value="<?= $b['id_barang'];?>"> <?= $b['nama_barang']; ?> </option>
                     <?php endforeach ; ?>
                 </select>
             </div>
 
             <div class="col-md-2">
-                <label for="jumlah_brg_masuk">Kuantitas</label>
-                <input type="number" name="jumlah_brg_masuk" id="jumlah_brg_masuk" class='form-control'>
+                <label for="jumlah_brg_keluar">Kuantitas</label>
+                <input type="number" name="jumlah_brg_keluar" id="jumlah_brg_keluar" class='form-control'>
             </div>
 
             <div class="col-md-12 mt-3">
@@ -96,13 +89,13 @@
             <?php foreach ($item as $row) : ?>
                 <tr>
                     <td><?= $no++; ?></td>
-                    <?php $id = $row['id_brg_masuk_item']; ?>
+                    <?php $id = $row['id_brg_keluar_item']; ?>
                     <td><?= $row['nama_barang']; ?></td>
-                    <td><?= $row['jumlah_brg_masuk']; ?></td>
+                    <td><?= $row['jumlah_brg_keluar']; ?></td>
                     <td><?= $row['nama_unit']; ?></td>
                     <td>
                         <a href="" class="badge badge-success" data-toggle='modal' data-target='#edit_item_<?= $id?>' data-toggle='tooltip' title='Ubah Item'><i class="fa fa-edit"></i></a>
-                        <a href="<?= base_url(); ?>admin/barangMasuk/hapusItem/<?= $id; ?>/<?= $brg['id_brg_masuk'] ;?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Item' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
+                        <a href="<?= base_url(); ?>admin/barangMasuk/hapusItem/<?= $id; ?>/<?= $brg['id_brg_keluar'] ;?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Item' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
                 <!-- Modal Edit -->
@@ -115,12 +108,12 @@
                                 <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="<?= base_url();?>admin/barangMasuk/ubahItem/<?= $id; ?>/<?= $brg['id_brg_masuk'];?>" method='post'>
+                            <form action="<?= base_url();?>admin/barangMasuk/ubahItem/<?= $id; ?>/<?= $brg['id_brg_keluar'];?>" method='post'>
                                 <div class="modal-body">
                                     <label for="nama_barang">Deskripsi</label>
                                     <input type="text" id="nama_barang" class='form-control' disabled value="<?= $row['nama_barang'];?>">
-                                    <label for="jumlah_brg_masuk_<?= $id;?>" class='mt-3'>Kuantitas</label>
-                                    <input type="number" name="jumlah_brg_masuk_<?= $id;?>" id="jumlah_brg_masuk_<?= $id;?>" class='form-control' value="<?= $row['jumlah_brg_masuk'];?>">
+                                    <label for="jumlah_brg_keluar_<?= $id;?>" class='mt-3'>Kuantitas</label>
+                                    <input type="number" name="jumlah_brg_keluar_<?= $id;?>" id="jumlah_brg_keluar_<?= $id;?>" class='form-control' value="<?= $row['jumlah_brg_keluar'];?>">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="submit" class="btn btn-primary">Ubah</button>
@@ -135,13 +128,7 @@
         </thead>
     </table>
 
-    <?php if($brg['note'] != '') : ?>
-        <i class="text-danger">*catatan : <?= $brg['note']; ?></i>
-    <?php endif ; ?>
-
-    <br>
-
-    <a href="<?= base_url(); ?>cetak/cetakBarangMasuk/<?= $brg['id_brg_masuk'] ; ?>" target="blank" class="btn btn-primary" data-toggle='tooltip' title='Cetak'><i class="fa fa-print"></i></a>
+    <a href="<?= base_url(); ?>cetak/cetakBarangKeluar/<?= $brg['id_brg_keluar'] ; ?>" target="blank" class="btn btn-primary" data-toggle='tooltip' title='Cetak'><i class="fa fa-print"></i></a>
 </div>
 
 <script src="<?= base_url(); ?>assets/js/jquery-chained.min.js"></script>

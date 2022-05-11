@@ -76,6 +76,35 @@
                 $this->db->join('user','user.id_user = brg_keluar.id_user') ;
                 return $this->db->get('brg_keluar')->row_array();
             }
+
+            public function hapusData($id)
+            {
+                $this->db->where('id_brg_keluar', $id) ;
+                if($this->db->delete('brg_keluar')){
+                    $this->db->where('id_brg_keluar', $id) ;
+                    $this->db->delete('brg_keluar_item') ;
+                    $pesan = [
+                        'pesan' => 'Berhasil Hapus Data',
+                        'warna' => 'success'
+                    ];
+                }else{
+                    $pesan = [
+                        'pesan' => 'Gagal Hapus Data',
+                        'warna' => 'success'
+                    ];
+                }
+
+                $this->session->set_flashdata($pesan) ;
+                redirect("admin/barangKeluar") ;
+            }
+
+            public function getDataBarangKeluarItem($id)
+            {
+                $this->db->where('id_brg_keluar', $id) ;
+                $this->db->join('barang','barang.id_barang = brg_keluar_item.id_barang') ;
+                $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
+                return $this->db->get('brg_keluar_item')->result_array() ;
+            }
         // GENERAL
     }
 

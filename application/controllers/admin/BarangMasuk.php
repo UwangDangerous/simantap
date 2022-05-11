@@ -105,8 +105,9 @@
                     $data['brg'] = $this->BarangMasuk_model->getDetailBarangMasuk($id) ;
                     $data['item'] = $this->BarangMasuk_model->getDataBarangMasukItem($id) ;
 
-                    $this->load->model("Produk_model") ;
-                    $data['barang'] = $this->Produk_model->getDataProduk() ;
+                    $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg') ;
+                    $this->db->order_by('nama_barang', 'asc') ;
+                    $data['barang'] = $this->db->get('barang')->result_array() ;
                     
                     $this->load->view('temp/header',$data) ;
                     $this->load->view('temp/dsbHeader') ;
@@ -225,6 +226,8 @@
             $this->load->model('_Date') ;
 
             $data['id'] = $id ;
+            $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg') ;
+            $this->db->order_by('nama_barang', 'asc') ;
             $data['barang'] = $this->db->get('barang')->result_array() ;
 
             $this->db->where('id_brg_masuk', $id) ;

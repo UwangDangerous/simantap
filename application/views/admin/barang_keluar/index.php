@@ -1,5 +1,5 @@
 <div class="card p-3">
-    <div class="accordion" id="accordionExample">
+    <!-- <div class="accordion" id="accordionExample">
         <div class="card">
             <div class="card-header" id="headingTwo">
                 <h5 class="mb-0">
@@ -10,12 +10,12 @@
                 </div>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                 <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
                 </div>
             </div>
         </div>
     </div>
-    <br>
+    <br> -->
 
     <?php if(!empty($this->session->flashdata('pesan') )) : ?>
                     
@@ -37,6 +37,7 @@
                     <th>No Referensi</th>
                     <th>Tanggal Barang Keluar</th>
                     <th>Konsumen</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -50,10 +51,16 @@
                         <td><?= $this->_Date->formatTanggal( $tanggal[0] ); ?> <?= $tanggal[1]; ?></td>
                         <td><?= $row['nama_blakang']; ?></td>
                         <td>
-                            <a href="" class="badge badge-primary" data-toggle="tooltip" title="Rincian"><i class="fa fa-eye"></i></a>
-                            <a href="" class="badge badge-success" data-toggle="tooltip" title="Ubah Data"><i class="fa fa-edit"></i></a>
-                            <a href="" class="badge badge-danger" data-toggle="tooltip" title="Hapus Data"><i class="fa fa-trash"></i></a>
-                            <a href="" class="badge badge-warning" data-toggle="tooltip" title="Cetak PDF"><i class="fa fa-print"></i></a>
+                            <?php if($row['status'] == 1) : ?>
+                                <i class="text-success">Selesai</i>
+                            <?php else : ?>
+                                <i class="text-warning">Menunggu Konfirmasi</i>
+                            <?php endif ; ?>
+                        </td>
+                        <td>
+                            <a href="<?= base_url();?>admin/barangKeluar/detail/<?= $row['id_brg_keluar']; ?>" class="badge badge-primary" data-toggle="tooltip" title="Rincian"><i class="fa fa-eye"></i></a>
+                            <a href="<?= base_url();?>admin/barangKeluar/hapus/<?= $row['id_brg_keluar']; ?>" class="badge badge-danger" data-toggle="tooltip" title="Hapus Data" onclick="return confirm('Yakin Hapus ?')"><i class="fa fa-trash"></i></a>
+                            <a target="blank" href="<?= base_url();?>cetak/cetakBarangKeluar/<?= $row['id_brg_keluar']; ?>" class="badge badge-warning" data-toggle="tooltip" title="Cetak PDF"><i class="fa fa-print"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ; ?>

@@ -78,7 +78,7 @@
 
         public function hapus($id)
         {
-            $this->BarangMasuk_model->hapusData($id) ;
+            $this->BarangKeluar_model->hapusData($id) ;
         }
 
 
@@ -92,25 +92,26 @@
             public function detail($id)
             {
                 if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                    $data['judul'] = 'Rincian Barang Masuk '; 
-                    $data['header'] = 'Rincian Barang Masuk'; 
+                    $data['judul'] = 'Rincian Barang Keluar '; 
+                    $data['header'] = 'Rincian Barang Keluar'; 
                     $data['bread'] = '
                     
                         <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="'.base_url().'admin/barangMasuk">Barang Masuk</a></li>
+                        <li class="breadcrumb-item"><a href="'.base_url().'admin/barangKeluar">Barang Keluar</a></li>
                         <li class="breadcrumb-item active"><a>Rincian</a></li>
                     
                     '; 
 
-                    $data['brg'] = $this->BarangMasuk_model->getDetailBarangMasuk($id) ;
-                    $data['item'] = $this->BarangMasuk_model->getDataBarangMasukItem($id) ;
+                    $data['brg'] = $this->BarangKeluar_model->getDetailBarangKeluar($id) ;
+                    $data['item'] = $this->BarangKeluar_model->getDataBarangKeluarItem($id) ;
 
-                    $this->load->model("Produk_model") ;
-                    $data['barang'] = $this->Produk_model->getDataProduk() ;
+                    $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg') ;
+                    $this->db->order_by('nama_barang', 'asc') ;
+                    $data['barang'] = $this->db->get('barang')->result_array() ;
                     
                     $this->load->view('temp/header',$data) ;
                     $this->load->view('temp/dsbHeader') ;
-                    $this->load->view('admin/barang_masuk/detail') ;
+                    $this->load->view('admin/barang_keluar/detail') ;
                     $this->load->view('temp/dsbFooter') ;
                     $this->load->view('temp/footer') ;
                 }else{
