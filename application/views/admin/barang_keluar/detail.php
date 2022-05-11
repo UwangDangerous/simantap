@@ -85,11 +85,12 @@
             <tr>
                 <th class="align-middle" rowspan="2">No</th>
                 <th class="align-middle" rowspan="2">Deskripsi</th>
-                <th class="align-middle" colspan="2">Kuantitas</th>
+                <th class="align-middle" colspan="3">Kuantitas</th>
                 <th class="align-middle" rowspan="2">Satuan</th>
                 <th class="align-middle" rowspan="2">Aksi</th>
             </tr>
             <tr>
+                <th class="align-middle">Stok</th>
                 <th class="align-middle">Diminta</th>
                 <th class="align-middle">Konfiramasi</th>
             </tr>
@@ -103,6 +104,7 @@
                         <?php $id = $row['id_brg_keluar_item']; ?>
                         <?php $id_array .= $id.'|'; ?>
                         <td><?= $row['nama_barang']; ?></td>
+                        <td><?= $stok = $this->BarangKeluar_model->getStok($row['id_barang']); ?></td>
                         <td><?= $row['jumlah_brg_keluar']; ?></td>
                         <td>
                             <?php if($row['konfirmasi'] == 0) : ?>
@@ -124,7 +126,7 @@
                     <?php if($item) : ?>
                         <tr>
                             <input type="hidden" name='id_array' value="<?= trim($id_array,"|") ;?>">
-                            <th colspan=3></th>
+                            <th colspan=4></th>
                             <th> <button type="submit" class="btn btn-primary" onclick="return confirm('Data Sudah Benar ?');">Konfirmasi</button> </th>
                             <th colspan=2></th>
                         </tr>

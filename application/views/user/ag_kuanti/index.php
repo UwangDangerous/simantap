@@ -32,7 +32,6 @@
                         $hilang = 0;
                         $rusak = 0 ;
                         $total = 0 ;
-                        $ketemu = 0;
                         
                         
                         if($n = $this->AlatGelas_model->getNormal($row['id_barang'] , $this->session->userdata('kunci'))) {
@@ -41,12 +40,6 @@
                             if($h){
                                 $hilang = $h ;
                                 $total = $n - $h ;
-
-                                $k = $this->AlatGelas_model->getKetemu($row['id_barang'] , $this->session->userdata('kunci')) ;
-                                if($k) {
-                                    $hilang -= $k;
-                                    $total += $k;
-                                }
                             }else{
                                 $hilang = 0 ;
                                 $total = $n ;

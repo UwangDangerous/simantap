@@ -105,6 +105,20 @@
                 $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
                 return $this->db->get('brg_keluar_item')->result_array() ;
             }
+
+            public function getStok($id)
+            {
+                $this->db->where('id_barang', $id) ;
+                $this->db->select_sum('jumlah_brg_masuk') ;
+                $masuk = $this->db->get('brg_masuk_item')->row_array()['jumlah_brg_masuk'] ;
+
+                $this->db->where('id_barang', $id) ;
+                $this->db->select_sum('konfirmasi') ;
+                $keluar = $this->db->get('brg_keluar_item')->row_array()['konfirmasi'] ;
+
+                $jml = $masuk - $keluar ;
+                return $jml ;
+            }
         // GENERAL
     }
 
