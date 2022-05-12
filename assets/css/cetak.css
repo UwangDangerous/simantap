@@ -48,3 +48,18 @@
     text-align: center; 
     float : left ;
 }
+
+#header-laporan{
+    width: 100%;
+    text-align: center;
+}
+
+#laporan table {
+    width: 100%;
+    border-collapse: collapse !important;
+    /* border: 1px solid black; */
+}
+
+#laporan table, td, th {
+    border: 1px solid;
+  }

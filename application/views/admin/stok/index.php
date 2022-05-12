@@ -17,7 +17,7 @@
                             <span class='input-group-text'>Dari</span>
                             <input type="date" class="form-control" name='tgl1'>
                             <span class='input-group-text'>Sampai</span>
-                            <input type="date" class="form-control" name='tgl1'>
+                            <input type="date" class="form-control" name='tgl2'>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2"><i class="fa fa-print"></i></button>
                             </div>
@@ -44,7 +44,7 @@
                             <span class='input-group-text'>Dari</span>
                             <input type="date" class="form-control" name='tgl1'>
                             <span class='input-group-text'>Sampai</span>
-                            <input type="date" class="form-control" name='tgl1'>
+                            <input type="date" class="form-control" name='tgl2'>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary" type="submit" id="button-addon2"><i class="fa fa-print"></i></button>
                             </div>
