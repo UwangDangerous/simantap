@@ -17,9 +17,11 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
-                    <th data-toggle="tooltip" title='Normal dan tersedia'>Normal</th>
-                    <th data-toggle="tooltip" title='Alat Gelas Rusak / Tidak Layak Digunakan'>Rusak</th>
-                    <th data-toggle="tooltip" title='Alat Gelas Hilang'>Hilang</th>
+                    <th data-toggle="tooltip" title='Normal dan tersedia'>N</th>
+                    <th data-toggle="tooltip" title='Alat Gelas Rusak / Pecah / Tidak Layak Digunakan'>R</th>
+                    <th data-toggle="tooltip" title='Alat Gelas Hilang'>H</th>
+                    <th data-toggle="tooltip" title='Alat Gelas Keluar Ke Balai'>PK</th>
+                    <th data-toggle="tooltip" title='Alat Gelas Masuk Dari Balai'>PM</th>
                     <th data-toggle="tooltip" title='Total Keseluruhan'>Total</th>
                     <th>Aksi</th>
                 </tr>
@@ -28,32 +30,19 @@
                 <?php $no = 1 ; ?>
                 <?php foreach ($brg as $row) : ?>
                     <?php 
-                        $normal = 0;
-                        $hilang = 0;
-                        $rusak = 0 ;
-                        $total = 0 ;
-                        
-                        
-                        if($n = $this->AlatGelas_model->getNormal($row['id_barang'] , $this->session->userdata('kunci'))) {
-                            $normal = $n;
-                            $h = $this->AlatGelas_model->getHilang($row['id_barang'] , $this->session->userdata('kunci')) ;
-                            if($h){
-                                $hilang = $h ;
-                                $total = $n - $h ;
-                            }else{
-                                $hilang = 0 ;
-                                $total = $n ;
-                            }
+                        $normal = $this->AlatGelas_model->getNormal($row['id_barang'] , $this->session->userdata('kunci'));
+                        $hilang = $this->AlatGelas_model->getHilang($row['id_barang'] , $this->session->userdata('kunci'));
+                        $ketemu = $this->AlatGelas_model->getKetemu($row['id_barang'] , $this->session->userdata('kunci'));
+                        $rusak = $this->AlatGelas_model->getRusak($row['id_barang'] , $this->session->userdata('kunci')) ;
+                        $pindah = $this->AlatGelas_model->getPindah($row['id_barang'] , $this->session->userdata('kunci'));
+                        $pindahMasuk = $this->AlatGelas_model->getPindahMasuk($row['id_barang'] , $this->session->userdata('kunci'));
 
-                            $r = $this->AlatGelas_model->getRusak($row['id_barang'] , $this->session->userdata('kunci')) ;
-                            if($r){
-                                $rusak = $r ;
-                                $total = $total - $r ;
-                            }else{
-                                $rusak = 0 ;
-                            }
-
-                        }
+                        $total = $normal-$hilang ;
+                        $total += $ketemu ;
+                        $total -= $rusak ;
+                        $total -= $pindah ;
+                        $total += $pindahMasuk ;
+                        
                     ?>
                     <tr>
                         <td><?= $no++; ?></td>
@@ -61,8 +50,10 @@
                         <td><?= $total; ?></td> <!-- total yg normal -->
                         <td><?= $rusak; ?></td>
                         <td><?= $hilang; ?></td>
+                        <td><i class="text-danger"><?= $pindah; ?></i></td> 
+                        <td><i class="text-danger"><?= $pindahMasuk; ?></i></td> 
                         <td><?= $normal; ?></td> <!-- total yg pernah digunakan -->
-                        <td><a href="<?= base_url();?>user/ag_kualitatif/detail/<?= $row['id_barang'];?>" class="badge badge-primary" data-toggle='tooltip' title='Tampilkan Rincian'><i class="fa fa-eye"></i></a></td>
+                        <td><a href="<?= base_url();?>user/ag_kuantitatif/detail/<?= $row['id_barang'];?>" class="badge badge-primary" data-toggle='tooltip' title='Tampilkan Rincian'><i class="fa fa-eye"></i></a></td>
                     </tr>
                 <?php endforeach ; ?>
             </tbody>

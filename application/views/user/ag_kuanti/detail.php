@@ -103,7 +103,7 @@
                                         <td><?= $h['jumlah_alat']; ?></td>
                                         <td><?= $this->_Date->formatTanggal( $h['tanggal'] ); ?></td>
                                         <td><?= $h['keterangan']; ?></td>
-                                        <td><a href="<?= base_url();?>user/ag_kualitatif/hapus/<?= $id;?>/<?= $h['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
+                                        <td><a href="<?= base_url();?>user/ag_kuantitatif/hapus/<?= $id;?>/<?= $h['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -148,7 +148,7 @@
                                         <td><?= $this->_Date->formatTanggal( $r['tanggal'] ); ?></td>
                                         <td><a target="blank" href="<?= base_url();?>foto_upload/<?= $r['gambar'];?>" class="badge badge-primary" data-toggle="tooltip" title="Tampilkan Foto Bukti"><i class="fa fa-eye"></i></a></td>
                                         <td><?= $r['keterangan']; ?></td>
-                                        <td><a href="<?= base_url();?>user/ag_kualitatif/hapus/<?= $id;?>/<?= $r['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
+                                        <td><a href="<?= base_url();?>user/ag_kuantitatif/hapus/<?= $id;?>/<?= $r['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -191,7 +191,7 @@
                                         <td><?= $k['jumlah_alat']; ?></td>
                                         <td><?= $this->_Date->formatTanggal( $k['tanggal'] ); ?></td>
                                         <td><?= $k['keterangan']; ?></td>
-                                        <td><a href="<?= base_url();?>user/ag_kualitatif/hapus/<?= $id;?>/<?= $k['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
+                                        <td><a href="<?= base_url();?>user/ag_kuantitatif/hapus/<?= $id;?>/<?= $k['id_alat'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -236,7 +236,7 @@
                                         <td><?= $p['jumlah_pindah']; ?></td>
                                         <td><?= $this->_Date->formatTanggal( $p['tgl_pindah'] ); ?></td>
                                         <td><?= $p['keterangan']; ?></td>
-                                        <td><a href="<?= base_url();?>user/ag_kualitatif/hapus/<?= $id;?>/<?= $p['id_agp'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
+                                        <td><a href="<?= base_url();?>user/ag_kuantitatif/hapus/<?= $id;?>/<?= $p['id_agp'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -278,7 +278,7 @@
                                         <td><?= $pm['jumlah_pindah']; ?></td>
                                         <td><?= $this->_Date->formatTanggal( $pm['tgl_pindah'] ); ?></td>
                                         <td><?= $pm['keterangan']; ?></td>
-                                        <td><a href="<?= base_url();?>user/ag_kualitatif/hapus/<?= $id;?>/<?= $pm['id_agp'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
+                                        <td><a href="<?= base_url();?>user/ag_kuantitatif/hapus/<?= $id;?>/<?= $pm['id_agp'];?>" class="badge badge-danger" data-toggle='tooltip' title="hapus data" onclick="return confirm('Yakin Hapus Data?')"> <i class="fa fa-trash"></i> </a></td>
                                     </tr>
                                 <?php endforeach ; ?>
                             </tbody>
@@ -311,7 +311,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url();?>user/ag_kualitatif/tambah/<?= $id;?>/1" method="post">
+                <form action="<?= base_url();?>user/ag_kuantitatif/tambah/<?= $id;?>/1" method="post">
                     <div class="modal-body">
                         <label for="jumlah_alat">Jumlah Barang</label>
                         <input type="number" name="jumlah_alat" id="jumlah_alat" class='form-control'>
@@ -337,7 +337,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url();?>user/ag_kualitatif/tambah/<?= $id;?>/2" method="post" enctype="multipart/form-data">
+                <form action="<?= base_url();?>user/ag_kuantitatif/tambah/<?= $id;?>/2" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
                         <label for="jumlah_alat">Jumlah Barang</label>
                         <input type="number" name="jumlah_alat" id="jumlah_alat" class='form-control'>
@@ -366,7 +366,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url();?>user/ag_kualitatif/tambah/<?= $id;?>/3" method="post">
+                <form action="<?= base_url();?>user/ag_kuantitatif/tambah/<?= $id;?>/3" method="post">
                     <div class="modal-body">
                         <label for="jumlah_alat">Jumlah Barang</label>
                         <input type="number" name="jumlah_alat" id="jumlah_alat" class='form-control'>
@@ -392,7 +392,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="<?= base_url();?>user/ag_kualitatif/pindah/<?= $id;?>/21" method="post">
+                <form action="<?= base_url();?>user/ag_kuantitatif/pindah/<?= $id;?>/21" method="post">
                     <div class="modal-body">
                         <label for="user2">Dari <?= $this->session->userdata('nama_user');?> Ke </label>
                         <select name="user2" id="user2" class='form-control'>
@@ -400,8 +400,8 @@
                                 <option value="<?= $b['id_user'];?>"><?= $b['nama_depan']; ?> <?= $b['nama_blakang']; ?></option>
                             <?php endforeach ; ?>
                         </select>
-                        <label for="jumlah_alat">Jumlah Barang</label>
-                        <input type="number" name="jumlah_alat" id="jumlah_alat" class='form-control'>
+                        <label for="jumlah_pindah">Jumlah Barang</label>
+                        <input type="number" name="jumlah_pindah" id="jumlah_pindah" class='form-control'>
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" id="keterangan" cols="30" rows="5" class='form-control'></textarea>
                     </div>

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-define("WEB", "Simantam-BMN");
+define("WEB", "Simantap-BMN");
 
 /*
 |--------------------------------------------------------------------------

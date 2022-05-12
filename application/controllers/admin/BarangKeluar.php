@@ -14,7 +14,7 @@
         public function index()
         {
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Barang Keluar '; 
+                $data['judul'] = 'Barang Keluar '.WEB; 
                 $data['header'] = 'Barang Keluar'; 
                 $data['bread'] = '
                 
@@ -92,7 +92,7 @@
             public function detail($id)
             {
                 if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                    $data['judul'] = 'Rincian Barang Keluar '; 
+                    $data['judul'] = 'Rincian Barang Keluar '.WEB; 
                     $data['header'] = 'Rincian Barang Keluar'; 
                     $data['bread'] = '
                     

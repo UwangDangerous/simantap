@@ -11,8 +11,8 @@
         public function index()
         {
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Dashboard '; 
-                $data['header'] = 'Dashboard'; 
+                $data['judul'] = 'Unit '.WEB; 
+                $data['header'] = 'Unit'; 
                 $data['bread'] = '
                 
                     <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
@@ -45,7 +45,7 @@
             }
 
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Unit '; 
+                $data['judul'] = 'Unit '.WEB; 
                 $data['header'] = 'Unit'; 
                 $data['bread'] = '
                 

@@ -14,7 +14,7 @@
         public function index()
         {
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Barang Masuk '; 
+                $data['judul'] = 'Barang Masuk '.WEB; 
                 $data['header'] = 'Barang Masuk'; 
                 $data['bread'] = '
                 
@@ -46,7 +46,7 @@
             $load = 'tambah';
 
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Barang Masuk '; 
+                $data['judul'] = 'Barang Masuk '.WEB; 
                 $data['header'] = 'Barang Masuk'; 
                 $data['bread'] = '
                 
@@ -92,7 +92,7 @@
             public function detail($id)
             {
                 if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                    $data['judul'] = 'Rincian Barang Masuk '; 
+                    $data['judul'] = 'Rincian Barang Masuk '.WEB; 
                     $data['header'] = 'Rincian Barang Masuk'; 
                     $data['bread'] = '
                     
