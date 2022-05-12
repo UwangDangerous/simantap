@@ -84,27 +84,29 @@
     <!-- Akun -->
 <?php else : ?>
 
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produk" aria-expanded="false" aria-controls="produk">
+    <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#produk" aria-expanded="false" aria-controls="produk">
             <div class="sb-nav-link-icon"><i class="fas fa-shopping-basket"></i></div>
                 Produk
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
         <div class="collapse" id="produk" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class="nav-link" href="<?= base_url(); ?>user/barang">
-                    <div class="sb-nav-link-icon"><i class="fa fa-fas fa-shopping-cart"></i></div>
-                    Permintaan Barang
-                </a>
-                <a class="nav-link" href="<?= base_url(); ?>user/ag_kualitatif">
-                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
-                    Alat Gelas Kualitatif
-                </a>
-                <a class="nav-link" href="<?= base_url(); ?>user/ag_kuantitatif">
-                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
-                    Alat Gelas Kuantitatif
-                </a>
+                
             </nav>
         </div>
+    </a> -->
+
+    <a class="nav-link" href="<?= base_url(); ?>user/barang">
+        <div class="sb-nav-link-icon"><i class="fa fa-fas fa-shopping-cart"></i></div>
+        Permintaan Barang
+    </a>
+    <a class="nav-link" href="<?= base_url(); ?>user/ag_kualitatif">
+        <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+        Alat Gelas Kualitatif
+    </a>
+    <a class="nav-link" href="<?= base_url(); ?>user/ag_kuantitatif">
+        <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+        Alat Gelas Kuantitatif
     </a>
 
 <?php endif ; ?>

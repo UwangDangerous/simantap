@@ -10,9 +10,9 @@
 
         public function index()
         {
-            $data['judul'] = 'Dashboard '; 
-            $data['header'] = 'Dashboard'; 
-            $data['bread'] = 'Dashboard'; 
+            $data['judul'] = 'Login '.WEB; 
+            $data['header'] = 'Login'; 
+            // $data['bread'] = 'Dashboard'; 
 
             if( $this->session->userdata('kunci') == null ){
 
