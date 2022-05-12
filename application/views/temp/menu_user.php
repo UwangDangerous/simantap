@@ -48,14 +48,35 @@
                     <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                     Barang Keluar
                 </a>
-                <a class="nav-link" href="<?= base_url(); ?>user/alatGelas">
-                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
-                    Alat Gelas
-                </a>
             </nav>
         </div>
     </a>
     <!-- produk -->
+
+    <!-- laporan -->
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#laporan" aria-expanded="false" aria-controls="laporan">
+            <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+                Laporan
+            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+        </a>
+        <div class="collapse" id="laporan" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+            <nav class="sb-sidenav-menu-nested nav">
+                <a class="nav-link" href="<?= base_url(); ?>admin/kuali">
+                    <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+                    Alat Gelas Kualitatif
+                </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/alatGelas">
+                    <div class="sb-nav-link-icon"><i class="fas fa-filter"></i></div>
+                    Alat Gelas Kuantitatif
+                </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/stok">
+                    <div class="sb-nav-link-icon"><i class="fas fa-money-bill-alt"></i></div>
+                    Kartu Stok
+                </a>
+            </nav>
+        </div>
+    </a>
+    <!-- laporan -->
 
 
 

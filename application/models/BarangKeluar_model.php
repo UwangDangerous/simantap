@@ -111,13 +111,19 @@
                 $this->db->where('id_barang', $id) ;
                 $this->db->select_sum('jumlah_brg_masuk') ;
                 $masuk = $this->db->get('brg_masuk_item')->row_array()['jumlah_brg_masuk'] ;
+                if($masuk == null) {
+                    $masuk = 0 ;
+                }
 
                 $this->db->where('id_barang', $id) ;
                 $this->db->select_sum('konfirmasi') ;
                 $keluar = $this->db->get('brg_keluar_item')->row_array()['konfirmasi'] ;
+                if($keluar == null) {
+                    $keluar = 0 ;
+                }
 
                 $jml = $masuk - $keluar ;
-                return $jml ;
+                return [$masuk, $keluar, $jml] ;
             }
         // GENERAL
     }

@@ -104,7 +104,13 @@
                         <?php $id = $row['id_brg_keluar_item']; ?>
                         <?php $id_array .= $id.'|'; ?>
                         <td><?= $row['nama_barang']; ?></td>
-                        <td><?= $stok = $this->BarangKeluar_model->getStok($row['id_barang']); ?></td>
+                        <td>
+                            <?php if($row['konfirmasi'] == 0) : ?>
+                                <?= $stok = $this->BarangKeluar_model->getStok($row['id_barang'])[2]; ?>
+                            <?php else: ?>
+                                -
+                            <?php endif ; ?>
+                        </td>
                         <td><?= $row['jumlah_brg_keluar']; ?></td>
                         <td>
                             <?php if($row['konfirmasi'] == 0) : ?>
