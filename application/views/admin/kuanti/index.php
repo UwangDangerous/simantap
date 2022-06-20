@@ -14,6 +14,7 @@
                     <th class='align-middle'>Kobonappza</th>
                     <th class='align-middle'>BPKOM</th>
                     <th class='align-middle'>OTKOS</th>
+                    <th class='align-middle'>TU</th>
                     <th class='align-middle'>Total</th>
                     <!-- <th class='align-middle'>Aksi</th> -->
                 </tr>
@@ -33,7 +34,8 @@
                         <td><?= $kobonapza = $this->AlatGelas_model->getTotalKualitatif($row['id_barang'], 55); ?></td> <!-- Kobonappza -->
                         <td><?= $bpkom = $this->AlatGelas_model->getTotalKualitatif($row['id_barang'], 56); ?></td> <!-- BPKOM -->
                         <td><?= $otkos = $this->AlatGelas_model->getTotalKualitatif($row['id_barang'], 57); ?></td> <!-- OTKOS -->
-                        <td><?= $bmn + $bbp + $bppb + $mbm + $kpa + $kalibrasi + $kobonapza + $bpkom + $otkos; ?></td> <!-- Total -->
+                        <td><?= $tu = $this->AlatGelas_model->getTotalKualitatif($row['id_barang'], 52); ?></td> <!-- TU -->
+                        <td><?= $bmn + $bbp + $bppb + $mbm + $kpa + $kalibrasi + $kobonapza + $bpkom + $otkos + $tu; ?></td> <!-- Total -->
                         <!-- <td></td> Aksi -->
                     </tr>
                 <?php endforeach ; ?>

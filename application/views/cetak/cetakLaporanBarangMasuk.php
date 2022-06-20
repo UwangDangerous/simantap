@@ -12,7 +12,7 @@ $html = '
     <title>Laporan Barang Masuk</title>
     <link rel="stylesheet" href="'.base_url().'assets/css/cetak.css">
 </head>
-<body>
+<body style="font-size:8pt">
 
     <div id="header-laporan">
         <h3>
@@ -27,6 +27,7 @@ $html = '
                 <tr>
                     <th>No</th>
                     <th>Nama Barang</th>
+                    <th>Tanggal</th>
                     <th>Kategori</th>
                     <th>Jumlah</th>
                     <th>Satuan</th>
@@ -35,16 +36,15 @@ $html = '
             <tbody>';
                 $no = 1;
                 foreach($barang as $row){
-                    $jml = $this->Cetak_model->getStokMasuk($row['id_barang'], $tgl1, $tgl2) ;
-                    if($jml > 0){
+                    $tgl = explode(' ', $row['tgl_brg_masuk']) ;
 $html .=                '<tr>
                             <td align="center">'.$no++.'</td>
                             <td>'.$row['nama_barang'].'</td>
+                            <td>'.$this->_Date->formatTanggal( $tgl['0'] ).'</td>
                             <td align="center">'.$row['nama_ktg'].'</td>
-                            <td align="center">'. $jml .'</td>
+                            <td align="center">'. $row['jumlah_brg_masuk'] .'</td>
                             <td align="center">'.$row['nama_unit'].'</td>
                         </tr>' ;    
-                    }            
                 }
 $html .=    '</tbody>
         </table>

@@ -28,19 +28,19 @@
         public function cetakLaporanBarangMasuk()
         {
             $this->load->model('Cetak_model') ;
-            $data['barang'] = $this->Cetak_model->getDataBarang() ;
             $data['tgl1'] = $this->input->post('tgl1') ;
             $data['tgl2'] = $this->input->post('tgl2') ;
-
+            $data['barang'] = $this->Cetak_model->getDataLaporanMasuk($data['tgl1'], $data['tgl2']) ;
+            
             $this->load->view('cetak/cetakLaporanBarangMasuk',$data) ; 
         }
 
         public function cetakLaporanBarangKeluar()
         {
             $this->load->model('Cetak_model') ;
-            $data['barang'] = $this->Cetak_model->getDataBarang() ;
             $data['tgl1'] = $this->input->post('tgl1') ;
             $data['tgl2'] = $this->input->post('tgl2') ;
+            $data['barang'] =$this->Cetak_model->getDataLaporanKeluar($data['tgl1'], $data['tgl2']) ; ;
 
             $this->load->view('cetak/cetakLaporanBarangKeluar',$data) ; 
         }
