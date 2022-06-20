@@ -95,6 +95,16 @@
                         return 0 ;
                     }
                 }
+
+                public function getTotalKualitatif($id, $user)
+                {
+                    $normal = $this->getNormal($id, $user) ;
+                    $normal -= $this->getHilang($id, $user) ; //Hilang
+                    $normal += $this->getKetemu($id, $user) ; //Ketemu
+                    $normal -= $this->getRusak($id, $user) ; //Rusak
+
+                    return $normal ;
+                }
             // hitungan
 
             public function getDataHilang($id)

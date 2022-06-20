@@ -10,9 +10,13 @@
 
         public function index() {
             if( $this->session->userdata('kunci') != null ){
-                $data['judul'] = 'Dashboard '; 
+                $data['judul'] = ''.WEB; 
                 $data['header'] = 'Dashboard'; 
                 $data['bread'] = 'Dashboard'; 
+
+                $data['kategori'] = $this->db->get('kategori')->result_array() ;
+                $data['barang'] = $this->barang() ;
+                $data['permintaan'] = $this->getBarangKeluarBaru() ;
                 
                 $this->load->view('temp/header',$data) ;
                 $this->load->view('temp/dsbHeader') ;
@@ -25,25 +29,35 @@
             }
         }
 
-        public function file($id = 0)
+        public function barang() 
         {
-            // $this->db->where('id_brg_masuk', $id) ;
-            // $berkas = $this->db->get('brg_masuk')->row_array() ;
-            // $berkas = $berkas['berkas'] ;
-            // // var_dump($berkas) ; die;
-            // // var_dump(file_exists("./berkas/$berkas")) ; die;
-            // if (file_exists("./berkas/$berkas") == false) {
-            //     $this->load->helper('download');
-            //     force_download("http://localhost/simantap_2/berkas/$berkas", null);
-            //     exit();
-            // }
-            // $this->session->set_flashdata( 
-            //     [
-            //         'pesan' => 'Berkas Kosong',
-            //         'warna' => 'danger'
-            //     ]
-            // );
-            // redirect($_SERVER['HTTP_REFERER']);
+            $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg', 'inner') ;
+            return $this->db->get('barang')->result_array() ;
+        }
+
+        public function cari_stok() 
+        {
+            $id = $this->input->post('id_barang') ;
+
+            $this->load->model('BarangKeluar_model') ;
+            $stok = $this->BarangKeluar_model->getStok( $id ) ;
+            
+            $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
+            $this->db->select('nama_unit') ;
+            $satuan =  $this->db->get('barang')->row_array() ;
+
+            if($stok[2] == 0){
+                echo "<i>Habis</i>" ;
+            }else{
+                echo $stok[2].' '.$satuan['nama_unit'] ;
+            }
+        }
+
+        public function getBarangKeluarBaru()
+        {
+            $this->db->where('status', 0)  ;
+            return $this->db->get('brg_keluar')->num_rows() ;
+            
         }
 
         

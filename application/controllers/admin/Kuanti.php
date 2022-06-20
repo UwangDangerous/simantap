@@ -1,6 +1,6 @@
 <?php 
 
-    class Kuali extends CI_Controller{
+    class Kuanti extends CI_Controller{
         public function __construct()
         {
             parent::__construct() ;
@@ -13,20 +13,20 @@
         public function index()
         {
             if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
-                $data['judul'] = 'Alat Gelas Kualitatif '.WEB; 
-                $data['header'] = 'Alat Gelas Kualitatif'; 
+                $data['judul'] = 'Alat Gelas Kuantitatif '.WEB; 
+                $data['header'] = 'Alat Gelas Kuantitatif'; 
                 $data['bread'] = '
                 
                     <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a>Alat Gelas Kualitatif</a></li>
+                    <li class="breadcrumb-item active"><a>Alat Gelas Kuantitatif</a></li>
                 
                 '; 
                 
-                $data['brg'] = $this->AlatGelas_model->getDataAlatGelas(21) ;
+                $data['brg'] = $this->AlatGelas_model->getDataAlatGelas(22) ;
                 
                 $this->load->view('temp/header',$data) ;
                 $this->load->view('temp/dsbHeader') ;
-                $this->load->view('admin/kuali/index') ;
+                $this->load->view('admin/kuanti/index') ;
                 $this->load->view('temp/dsbFooter') ;
                 $this->load->view('temp/footer') ;
             }else{

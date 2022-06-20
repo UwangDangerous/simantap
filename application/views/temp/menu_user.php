@@ -21,7 +21,7 @@
                 </a>
                 <a class="nav-link" href="<?= base_url(); ?>admin/sdm">
                     <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
-                    SDM
+                    User
                 </a>
             </nav>
         </div>
@@ -65,7 +65,7 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
                     Alat Gelas Kualitatif
                 </a>
-                <a class="nav-link" href="<?= base_url(); ?>admin/alatGelas">
+                <a class="nav-link" href="<?= base_url(); ?>admin/kuanti">
                     <div class="sb-nav-link-icon"><i class="fas fa-filter"></i></div>
                     Alat Gelas Kuantitatif
                 </a>
@@ -83,25 +83,25 @@
 
 
     <!-- Akun -->
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Akun" aria-expanded="false" aria-controls="Akun">
+        <!-- <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Akun" aria-expanded="false" aria-controls="Akun">
             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
             Profil
             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
         </a>
         <div class="collapse" id="Akun" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
             <nav class="sb-sidenav-menu-nested nav">
-                <a class='nav-link' href="<?= base_url(); ?>notifikasi">
+                <a class='nav-link' href="<?//= base_url(); ?>notifikasi">
                     <div class="sb-nav-link-icon"><i class="fas fa-bell"></i></div>
                     Notifikasi 
                     <span class="badge badge-danger">2</span>
                 </a>
 
-                <a class="nav-link" href="<?= base_url(); ?>login/logout">
+                <a class="nav-link" href="<?//= base_url(); ?>login/logout">
                     <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
                     Logout
                 </a>
             </nav>
-        </div>
+        </div> -->
     <!-- Akun -->
 <?php else : ?>
 
@@ -126,7 +126,7 @@
         Alat Gelas Kualitatif
     </a>
     <a class="nav-link" href="<?= base_url(); ?>user/ag_kuantitatif">
-        <div class="sb-nav-link-icon"><i class="fa fa-vial"></i></div>
+        <div class="sb-nav-link-icon"><i class="fas fa-filter"></i></div>
         Alat Gelas Kuantitatif
     </a>
 
