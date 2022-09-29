@@ -23,6 +23,10 @@
                     <div class="sb-nav-link-icon"><i class="fa fa-users"></i></div>
                     User
                 </a>
+                <a class="nav-link" href="<?= base_url(); ?>admin/rak">
+                    <div class="sb-nav-link-icon"><i class="fa fa-archive"></i></div>
+                    Rak Barang
+                </a>
             </nav>
         </div>
     </a>

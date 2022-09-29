@@ -27,6 +27,7 @@
                     <th>Nama Barang</th>
                     <th>Unit</th>
                     <th>Kategori</th>
+                    <th>Rak</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -39,7 +40,9 @@
                         <td> <?= $row['nama_barang']; ?> </td>
                         <td> <?= $row['nama_unit']; ?> </td>
                         <td> <?= $row['nama_ktg']; ?> </td>
+                        <td> <?= $row['nama_rak']; ?> </td>
                         <td>
+                            <a href="<?= base_url();?>admin/produk/rak/<?= $row['id_barang'];?>" class="badge badge-primary" data-toggle='tooltip' title='Tambah Rak'><i class="fa fa-archive"></i></a>
                             <a href="<?= base_url();?>admin/produk/aksi/<?= $row['id_barang'];?>" class="badge badge-success" data-toggle='tooltip' title='Ubah Data'><i class="fa fa-edit"></i></a>
                             <a href="<?= base_url();?>admin/produk/hapus/<?= $row['id_barang'];?>" class="badge badge-danger" data-toggle='tooltip' title='Hapus Data' onclick='return confirm("Yakin hapus data ini?")'><i class="fa fa-trash"></i></a>
                         </td>

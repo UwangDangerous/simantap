@@ -5,6 +5,8 @@
         {
             $this->db->join('kategori', 'kategori.id_ktg = barang.id_ktg') ;
             $this->db->join('unit', 'unit.id_unit = barang.id_unit') ;
+            $this->db->join('use_rak', 'use_rak.id = barang.id_barang', 'left') ;
+            $this->db->join('rak', 'rak.id_rak = use_rak.id_rak', 'left') ;
             return $this->db->get('barang')->result_array();
         }
 

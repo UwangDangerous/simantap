@@ -33,6 +33,46 @@
             }
         }
 
+        public function rak($id)
+        {
+            if( $this->session->userdata('kunci') != null && $this->session->userdata('kunci') == 1 ){
+                $data['judul'] = 'Rak Barang '.WEB; 
+                $nama = $this->Produk_model->getDataProdukEdit($id) ;
+                $data['header'] = '<h4> Rak Barang untuk '.$nama['nama_barang']. '</h4>'; 
+                $data['bread'] = '
+                
+                    <li class="breadcrumb-item"><a href="'.base_url().'">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="'.base_url().'admin/produk">Produk</a></li>
+                    <li class="breadcrumb-item active"><a>Rak Barang</a></li>
+                
+                '; 
+
+                $this->load->model('Rak_model') ;
+                $data['rak'] = $this->Rak_model->getDataRak()->result_array() ; 
+                $data['use'] = $this->db->get_where('use_rak', ['id' => $id]) ;
+
+
+                $this->form_validation->set_rules('rak', 'Pilih Rak', 'required');
+
+                if($this->form_validation->run() == FALSE) {
+                    $this->load->view('temp/header',$data) ;
+                    $this->load->view('temp/dsbHeader') ;
+                    $this->load->view('admin/produk/rak') ;
+                    $this->load->view('temp/dsbFooter') ;
+                    $this->load->view('temp/footer') ;
+                }else{
+                    if($data['use']->num_rows() == 0){
+                        $this->Rak_model->use_rak_simpan($id) ;
+                    }else{
+                        $this->Rak_model->use_rak_ubah($id) ;
+                    }
+                }
+            }else{
+                $this->session->set_flashdata("login", "Silahkan Login Kembali");
+                redirect("login") ;
+            }
+        }
+
         public function aksi($id = 0) 
         {
             if($id == 0){
